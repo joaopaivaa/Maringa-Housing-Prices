@@ -8,7 +8,7 @@ suppressWarnings({
   })
 })
 
-setwd("C:\\Users\\joaov\\Documents\\Imoveis Maringá")
+setwd("C:\\Users\\joaov\\Documents\\Maringa Housing")
 
 # Pedro Granado Imoveis
 
@@ -191,7 +191,7 @@ for (j in 1:num_pages){
 
 # Past properties
 
-past_properties <- read.csv2("C:\\Users\\joaov\\Documents\\Imoveis Maringá\\Past Displayed Properties.csv")
+past_properties <- read.csv2("C:\\Users\\joaov\\Documents\\Maringa Housing\\Past Displayed Properties.csv")
 past_properties <- past_properties %>% select(-X)
 
 write.csv2(displayed_properties, "Past Displayed Properties.csv")
@@ -204,7 +204,7 @@ sold_properties <- sold_properties[, !names(sold_properties) %in% c("broker.y", 
 names(sold_properties) <- sub("\\.x", "", names(sold_properties))
 sold_properties$sold_date <- as.character(Sys.Date() - 1)
 
-past_sold_properties <- read.csv2("C:\\Users\\joaov\\Documents\\Imoveis Maringá\\Past Sold Properties.csv")
+past_sold_properties <- read.csv2("C:\\Users\\joaov\\Documents\\Maringa Housing\\Past Sold Properties.csv")
 past_sold_properties <- past_sold_properties %>% select(-X)
 
 past_sold_properties <- rbind(past_sold_properties, sold_properties)
@@ -221,7 +221,7 @@ new_properties$added_date <- as.character(Sys.Date() - 1)
 
 past_new_properties = data.frame(NULL)
 
-past_new_properties <- read.csv2("C:\\Users\\joaov\\Documents\\Imoveis Maringá\\Past New Properties.csv")
+past_new_properties <- read.csv2("C:\\Users\\joaov\\Documents\\Maringa Housing\\Past New Properties.csv")
 past_new_properties <- past_new_properties %>% select(-X)
 
 past_new_properties <- rbind(past_new_properties, new_properties)
