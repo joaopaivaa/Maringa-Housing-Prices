@@ -155,13 +155,13 @@ def scraper():
 
 # Execute scraper
 
-for i in range(3):
+for i in range(5):
     try:
         displayed_properties = scraper()
-        print("Success in first try")
+        print(f"Success in try {i+1}")
         break
     except Exception as e:
-        print(f"Try {i + 1} times but failed in all of them: {e}")
+        print(f"Failed in try {i+1}: {e}")
         time.sleep(10)
 else:
     print("All tries failed")
