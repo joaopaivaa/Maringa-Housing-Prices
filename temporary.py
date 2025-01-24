@@ -262,11 +262,29 @@ def silvio_iwata_scraper():
     
     return displayed_properties
 
-displayed_properties_pedro_granado = pedro_granado_scraper()
+try:
+    displayed_properties_pedro_granado = pedro_granado_scraper()
+except:
+    max_tries = 2
+    for i in range(max_tries):
+        displayed_properties_pedro_granado = pedro_granado_scraper()
+        break
 
-displayed_properties_lelo = lelo_scraper()
+try:
+    displayed_properties_lelo = lelo_scraper()
+except:
+    max_tries = 2
+    for i in range(max_tries):
+        displayed_properties_lelo = lelo_scraper()
+        break
 
-displayed_properties_silvio_iwata = silvio_iwata_scraper()
+try:
+    displayed_properties_silvio_iwata = silvio_iwata_scraper()
+except:
+    max_tries = 2
+    for i in range(max_tries):
+        displayed_properties_silvio_iwata = silvio_iwata_scraper()
+        break
 
 displayed_properties = pd.concat([displayed_properties_pedro_granado,
                                   displayed_properties_lelo,
