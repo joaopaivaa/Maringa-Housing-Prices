@@ -6,4 +6,4 @@ This project is composed by 4 steps:
 
 (To do) - Data cleaning.
 
-(To do) - Exploratory spatial data analysis with Python or R.
+(To do) - Exploratory geospatial data analysis with Python or R.
