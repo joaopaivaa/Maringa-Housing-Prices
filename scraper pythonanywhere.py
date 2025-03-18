@@ -295,9 +295,9 @@ displayed_properties = pd.concat([displayed_properties_pedro_granado,
 
 ## Carregar imóveis passados
 
-past_properties = pd.read_csv(os.path.join(BASE_DIR, "Past Displayed Properties.csv"), sep=';')
+past_properties = pd.read_csv(os.path.join(BASE_DIR, "/Maringa-Housing-Prices/Past Displayed Properties.csv"), sep=';')
 
-displayed_properties.to_csv(os.path.join(BASE_DIR, "Past Displayed Properties.csv"), sep=';', index=False)
+displayed_properties.to_csv(os.path.join(BASE_DIR, "/Maringa-Housing-Prices/Past Displayed Properties.csv"), sep=';', index=False)
 
 ### Identificar imóveis vendidos
 
@@ -305,10 +305,10 @@ sold_properties = past_properties.merge(displayed_properties, on="property_url",
 sold_properties = sold_properties[sold_properties['_merge'] == 'left_only'].drop(columns=['_merge'])
 sold_properties['sold_date'] = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
-past_sold_properties = pd.read_csv(os.path.join(BASE_DIR, "Past Sold Properties.csv"), sep=';')
+past_sold_properties = pd.read_csv(os.path.join(BASE_DIR, "/Maringa-Housing-Prices/Past Sold Properties.csv"), sep=';')
 past_sold_properties = pd.concat([past_sold_properties, sold_properties], ignore_index=True)
 
-past_sold_properties.to_csv(os.path.join(BASE_DIR, "Past Sold Properties.csv"), sep=';', index=False)
+past_sold_properties.to_csv(os.path.join(BASE_DIR, "/Maringa-Housing-Prices/Past Sold Properties.csv"), sep=';', index=False)
 
 ### Identificar novos imóveis
 
@@ -316,7 +316,7 @@ new_properties = displayed_properties.merge(past_properties, on="property_url", 
 new_properties = new_properties[new_properties['_merge'] == 'left_only'].drop(columns=['_merge'])
 new_properties['added_date'] = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
-past_new_properties = pd.read_csv(os.path.join(BASE_DIR, "Past New Properties.csv"), sep=';')
+past_new_properties = pd.read_csv(os.path.join(BASE_DIR, "/Maringa-Housing-Prices/Past New Properties.csv"), sep=';')
 past_new_properties = pd.concat([past_new_properties, new_properties], ignore_index=True)
 
-past_new_properties.to_csv(os.path.join(BASE_DIR, "Past New Properties.csv"), sep=';', index=False)
+past_new_properties.to_csv(os.path.join(BASE_DIR, "/Maringa-Housing-Prices/Past New Properties.csv"), sep=';', index=False)
