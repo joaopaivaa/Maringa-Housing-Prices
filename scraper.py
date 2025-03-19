@@ -21,7 +21,7 @@ def pedro_granado_scraper():
 
     # Pedro Granado Imóveis
 
-    displayed_properties = pd.DataFrame()
+    property_list = []
 
     main_page = get_html("https://www.pedrogranado.com.br/pesquisa-de-imoveis/?locacao_venda=V&id_cidade%5B%5D=35&ordem=1")
     num_properties = int(re.search(r"(?<=\()\d+(?=\))", main_page.select("option")[4].text).group())
@@ -73,7 +73,7 @@ def pedro_granado_scraper():
             
             broker = 'Pedro Granado Imóveis'
             
-            property_info = pd.DataFrame([{
+            property_info = {
                 'property_url': property_url,
                 'broker': broker,
                 'district': district,
@@ -89,9 +89,11 @@ def pedro_granado_scraper():
                 'num_bedroom': num_bedroom,
                 'num_bathroom': num_bathroom,
                 'num_garage': num_garage
-            }])
+            }
             
-            displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
+            property_list.append(property_info)
+
+    displayed_properties = pd.DataFrame(property_list)
     
     return displayed_properties
 
@@ -99,7 +101,7 @@ def lelo_scraper():
 
     # Lelo Imóveis
 
-    displayed_properties = pd.DataFrame()
+    property_list = []
 
     main_page = get_html("https://www.leloimoveis.com.br/imoveis/venda-maringa")
     num_properties = int(re.search(r"\d+", main_page.select_one("strong.list__highlight").text).group())
@@ -153,7 +155,7 @@ def lelo_scraper():
             
             broker = 'Lelo Imóveis'
             
-            property_info = pd.DataFrame([{
+            property_info = {
                 'property_url': property_url,
                 'broker': broker,
                 'district': district,
@@ -169,9 +171,11 @@ def lelo_scraper():
                 'num_bedroom': num_bedroom,
                 'num_bathroom': None,
                 'num_garage': num_garage
-            }])
+            }
             
-            displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
+            property_list.append(property_info)
+
+    displayed_properties = pd.DataFrame(property_list)
 
     return displayed_properties
 
@@ -179,7 +183,7 @@ def silvio_iwata_scraper():
 
     # Silvio Iwata Imóveis
 
-    displayed_properties = pd.DataFrame()
+    property_list = []
 
     main_page = get_html("https://www.silvioiwata.com.br/imoveis/venda")
     num_properties = int(re.search(r"\d+", main_page.select_one("p.cor-primaria").text).group())
@@ -252,7 +256,7 @@ def silvio_iwata_scraper():
             
             broker = 'Silvio Iwata'
             
-            property_info = pd.DataFrame([{
+            property_info = {
                 'property_url': property_url,
                 'broker': broker,
                 'district': district,
@@ -268,9 +272,11 @@ def silvio_iwata_scraper():
                 'num_bedroom': num_bedroom,
                 'num_bathroom': num_bathroom,
                 'num_garage': num_garage
-            }])
+            }
             
-            displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
+            property_list.append(property_info)
+
+    displayed_properties = pd.DataFrame(property_list)
     
     return displayed_properties
 
@@ -305,8 +311,6 @@ displayed_properties = pd.concat([displayed_properties_pedro_granado,
                                   displayed_properties_silvio_iwata], ignore_index=True)
 
 ## Carregar imóveis passados
-
-past_properties = pd.read_csv("Past Displayed Properties.csv", sep=';')
 
 displayed_properties.to_csv("Past Displayed Properties.csv", sep=';', index=False)
 
