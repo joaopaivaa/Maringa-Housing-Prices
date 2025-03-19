@@ -11,9 +11,11 @@ os.chdir(r"C:\Users\joaov\Documents\Maringa Housing")
 
 past_properties = pd.read_csv("Past Displayed Properties.csv", sep=';')
 
+session = requests.Session()
+
 # Função para obter o HTML de uma página
 def get_html(url):
-    response = requests.get(url)
+    response = session.get(url)
     response.raise_for_status()
     return BeautifulSoup(response.text, 'lxml')
 
