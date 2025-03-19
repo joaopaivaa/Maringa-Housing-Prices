@@ -30,7 +30,7 @@ def pedro_granado_scraper():
     num_pages = -(-num_properties // 16)  # Arredonda para cima
 
     for j in range(1, num_pages + 1):
-        time.sleep(0.5)
+        time.sleep(0.1)
         page_url = f"https://www.pedrogranado.com.br/pesquisa-de-imoveis/?locacao_venda=V&id_cidade%5B%5D=35&ordem=1&&pag={j}"
         main_page = get_html(page_url)
 
@@ -62,7 +62,7 @@ def pedro_granado_scraper():
 
             area = small_text[3].split(':')[1].strip() if len(small_text[3]) > 3 else None
 
-            time.sleep(0.5)
+            time.sleep(0.1)
             property_page = get_html(property_url)
                         
             lat_long_src = property_page.select("iframe")[1]['src']
@@ -110,7 +110,7 @@ def lelo_scraper():
     num_pages = -(-num_properties // 16)
 
     for j in range(1, num_pages + 1):
-        time.sleep(0.5)
+        time.sleep(0.1)
         page_url = f"https://www.leloimoveis.com.br/imoveis/venda-maringa-pagina-{j}"
         main_page = get_html(page_url)
 
@@ -145,7 +145,7 @@ def lelo_scraper():
             else:
                 num_garage = None
 
-            time.sleep(0.5)
+            time.sleep(0.1)
             property_page = get_html(property_url)
 
             try:
@@ -192,7 +192,7 @@ def silvio_iwata_scraper():
     num_pages = -(-num_properties // 9)
 
     for j in range(1, num_pages + 1):
-        time.sleep(0.5)
+        time.sleep(0.1)
         page_url = f"https://www.silvioiwata.com.br/imoveis/venda?pagina={j}"
         main_page = get_html(page_url)
         
@@ -247,7 +247,7 @@ def silvio_iwata_scraper():
                 num_bathroom = None
                 num_garage = None
 
-            time.sleep(0.5)
+            time.sleep(0.1)
             property_page = get_html(property_url)
 
             try:
