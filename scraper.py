@@ -9,6 +9,8 @@ import time
 # Configuração do diretório de trabalho
 os.chdir(r"C:\Users\joaov\Documents\Maringa Housing")
 
+past_properties = pd.read_csv("Past Displayed Properties.csv", sep=';')
+
 # Função para obter o HTML de uma página
 def get_html(url):
     response = requests.get(url)
@@ -34,6 +36,12 @@ def pedro_granado_scraper():
                 
         for property in properties:
 
+            url = property.select('div.col-lg-4 a')[0]['href']
+            property_url = f"https://www.pedrogranado.com.br/{url}"
+
+            if property_url in past_properties['url].values:
+                continue
+
             district = property.select('div.col-lg-4 h4')[0].text.strip()
             price = property.select('div.col-lg-4 h3')[0].text.strip()
 
@@ -51,9 +59,6 @@ def pedro_granado_scraper():
             num_garage = num_bed_bath_garage[2].text.split('|')[1].strip() if len(num_bed_bath_garage) > 2 else None
 
             area = small_text[3].split(':')[1].strip() if len(small_text[3]) > 3 else None
-
-            url = property.select('div.col-lg-4 a')[0]['href']
-            property_url = f"https://www.pedrogranado.com.br/{url}"
 
             time.sleep(0.5)
             property_page = get_html(property_url)
@@ -109,6 +114,12 @@ def lelo_scraper():
                 
         for property in properties:
 
+            url = property.select('a')[0]['href']
+            property_url = f"https://www.leloimoveis.com.br{url}"
+
+            if property_url in past_properties['url].values:
+                continue
+
             district = property.select("span.list__address")[0].text.split("-")[0].strip()
             price = property.select("span.list__price")[0].text.strip()
 
@@ -129,9 +140,6 @@ def lelo_scraper():
                 num_garage = property.select("div.list__feature")[0].select('div.list__item')[2].select('span')[0].text.strip()
             else:
                 num_garage = None
-
-            url = property.select('a')[0]['href']
-            property_url = f"https://www.leloimoveis.com.br{url}"
 
             time.sleep(0.5)
             property_page = get_html(property_url)
@@ -186,6 +194,12 @@ def silvio_iwata_scraper():
         
         for property in properties:
 
+            url = property.select('div.box-img-lista')[0].select('a')[0]['href']
+            property_url = f"https://www.silvioiwata.com.br{url}"
+
+            if property_url in past_properties['url].values:
+                continue
+
             bold_text = property.select('div.lista-imoveis-detalhes')[0].select('strong')[1].text.split('-')
 
             district = bold_text[0].strip() if len(bold_text) == 3 else None
@@ -226,9 +240,6 @@ def silvio_iwata_scraper():
                 num_bedroom = None
                 num_bathroom = None
                 num_garage = None
-
-            url = property.select('div.box-img-lista')[0].select('a')[0]['href']
-            property_url = f"https://www.silvioiwata.com.br{url}"
 
             time.sleep(0.5)
             property_page = get_html(property_url)
