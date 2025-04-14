@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 import time
 
 past_properties = pd.read_csv("Properties.csv", sep=';')
@@ -23,7 +23,7 @@ def pedro_granado_scraper():
 
     # Pedro Granado Imóveis
 
-    displayed_properties = pd.DataFrame()
+    property_list = []
 
     main_page = get_html("https://www.pedrogranado.com.br/pesquisa-de-imoveis/?locacao_venda=V&id_cidade%5B%5D=35&ordem=1")
     num_properties = int(re.search(r"(?<=\()\d+(?=\))", main_page.select("option")[4].text).group())
@@ -31,7 +31,8 @@ def pedro_granado_scraper():
 
     properties = []
     for j in range(1, num_pages + 1):
-        time.sleep(0.5)
+        
+        time.sleep(0.1)
         page_url = f"https://www.pedrogranado.com.br/pesquisa-de-imoveis/?locacao_venda=V&id_cidade%5B%5D=35&ordem=1&&pag={j}"
         main_page = get_html(page_url)
 
@@ -174,7 +175,7 @@ def lelo_scraper():
 
     # Lelo Imóveis
 
-    displayed_properties = pd.DataFrame()
+    property_list = []
 
     main_page = get_html("https://www.leloimoveis.com.br/imoveis/venda-maringa")
     num_properties = int(re.search(r"\d+", main_page.select_one("strong.list__highlight").text).group())
@@ -182,7 +183,8 @@ def lelo_scraper():
 
     properties = []
     for j in range(1, num_pages + 1):
-        time.sleep(0.5)
+        
+        time.sleep(0.1)
         page_url = f"https://www.leloimoveis.com.br/imoveis/venda-maringa-pagina-{j}"
         main_page = get_html(page_url)
 
@@ -314,7 +316,7 @@ def silvio_iwata_scraper():
 
     # Silvio Iwata Imóveis
 
-    displayed_properties = pd.DataFrame()
+    property_list = []
 
     main_page = get_html("https://www.silvioiwata.com.br/imoveis/venda")
     num_properties = int(re.search(r"\d+", main_page.select_one("p.cor-primaria").text).group())
