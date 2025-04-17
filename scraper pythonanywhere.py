@@ -6,7 +6,8 @@ import os
 from datetime import datetime
 import time
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print(BASE_DIR)
 
 past_properties = pd.read_csv(os.path.join(BASE_DIR, "Properties.csv"), sep=';')
 
@@ -35,7 +36,7 @@ def pedro_granado_scraper():
         main_page = get_html(page_url)
 
         properties += main_page.select("div.card_imoveis_home")
-                
+
     for property in properties:
 
         # Property URL
@@ -48,7 +49,7 @@ def pedro_granado_scraper():
 
         if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
             continue
-        
+
         # Property district
         if (len(property.select('div.col-lg-4 h4')) > 0):
             district = property.select('div.col-lg-4 h4')[0].text.strip()
@@ -70,7 +71,7 @@ def pedro_granado_scraper():
                     ref = small_text[0].split(':')[1].strip() if len(small_text) > 0 else None
                 else:
                     ref = None
-        
+
             if len(small_text) > 1:
                 if ('-' in small_text[1]):
                     category = small_text[1].split('-')[0].strip()
@@ -86,13 +87,13 @@ def pedro_granado_scraper():
                 else:
                     city = None
                     state = None
-            
+
             if len(small_text) > 3:
                 if (':' in small_text[3]):
                     area = small_text[3].split(':')[1].strip()
                 else:
                     area = None
-            
+
         else:
             category = None
             type = None
@@ -109,7 +110,7 @@ def pedro_granado_scraper():
                 num_bedroom = num_bed_bath_garage[0].text.split('|')[1].strip()
             else:
                 num_bedroom = None
-            
+
             if ('|' in num_bed_bath_garage[1].text) and (len(num_bed_bath_garage) > 1):
                 num_bathroom = num_bed_bath_garage[1].text.split('|')[1].strip()
             else:
@@ -119,7 +120,7 @@ def pedro_granado_scraper():
                 num_garage = num_bed_bath_garage[2].text.split('|')[1].strip()
             else:
                 num_garage = None
-                
+
         else:
             num_bedroom = None
             num_bathroom = None
@@ -127,7 +128,7 @@ def pedro_granado_scraper():
 
         # Loads property page
         property_page = get_html(property_url)
-        
+
         # Property latitude and longitude
         if (len(property_page.select("iframe")) > 1):
             lat_long_src = property_page.select("iframe")[1]['src']
@@ -140,7 +141,7 @@ def pedro_granado_scraper():
         else:
             lat = None
             long = None
-        
+
         # Property broker
         broker = 'Pedro Granado Imóveis'
 
@@ -166,7 +167,7 @@ def pedro_granado_scraper():
         displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
 
         time.sleep(0.5)
-    
+
     return displayed_properties
 
 def lelo_scraper():
@@ -186,9 +187,9 @@ def lelo_scraper():
         main_page = get_html(page_url)
 
         properties += main_page.select('div.list__hover')
-                
+
     for property in properties:
-        
+
         # Property URL
         if (len( property.select('a')) > 0) and ('href' in property.select('a')[0].attrs):
             url = property.select('a')[0]['href']
@@ -199,7 +200,7 @@ def lelo_scraper():
 
         if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
             continue
-        
+
         # Property district
         if (len(property.select("span.list__address")) > 0):
             if ('-' in property.select("span.list__address")[0].text):
@@ -220,13 +221,13 @@ def lelo_scraper():
             category = property.select("span.list__type")[0].text.strip().split()[0]
         else:
             category = None
-        
+
         # Property reference code
         if (len(property.select("span.list__reference")) > 0):
             ref = property.select("span.list__reference")[0].text.strip()
         else:
             ref = None
-        
+
         # Property city and state
         if (len(property.select("span.list__address")) > 0):
             if (' - ' in property.select("span.list__address")[0].text.strip()):
@@ -248,7 +249,7 @@ def lelo_scraper():
             area = property.select("div.list__feature")[0].select('div.list__item')[0].select('span')[0].text.split()[0]
         else:
             area = None
-        
+
         # Property number of bedroom and garage
         if (len(property.select("div.list__feature")) > 0):
 
@@ -256,7 +257,7 @@ def lelo_scraper():
                 num_bedroom = property.select("div.list__feature")[0].select('div.list__item')[1].select('span')[0].text.strip()
             else:
                 num_bedroom = None
-            
+
             if len(property.select("div.list__feature")[0].select('div.list__item')) > 2:
                 num_garage = property.select("div.list__feature")[0].select('div.list__item')[2].select('span')[0].text.strip()
             else:
@@ -280,10 +281,10 @@ def lelo_scraper():
         else:
             lat = None
             long = None
-        
+
         # Property broker
         broker = 'Lelo Imóveis'
-        
+
         # Property informations
         property_info = pd.DataFrame([{
             'property_url': property_url,
@@ -302,7 +303,7 @@ def lelo_scraper():
             'num_bathroom': None,
             'num_garage': num_garage
         }])
-        
+
         displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
 
         time.sleep(0.5)
@@ -324,9 +325,9 @@ def silvio_iwata_scraper():
 
         page_url = f"https://www.silvioiwata.com.br/imoveis/venda?pagina={j}"
         main_page = get_html(page_url)
-        
+
         properties += main_page.select('div.content')
-        
+
     for property in properties:
 
         # Property URL
@@ -335,11 +336,11 @@ def silvio_iwata_scraper():
             property_url = f"https://www.silvioiwata.com.br{url}"
             actual_properties_url.append(property_url)
         else:
-            property_url = 'URL not found'            
+            property_url = 'URL not found'
 
         if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
             continue
-        
+
         # Property district, city and state
         if (len(property.select('div.lista-imoveis-detalhes')) > 0) and (len(property.select('div.lista-imoveis-detalhes')[0].select('strong')) > 1):
             if ('-' in property.select('div.lista-imoveis-detalhes')[0].select('strong')[1].text):
@@ -355,15 +356,15 @@ def silvio_iwata_scraper():
             district = None
             city = None
             state = None
-        
+
         # Property price, category, area
         if (len(property.select('div.lista-imoveis-detalhes')) > 0):
-            
+
             if (len(property.select('div.lista-imoveis-detalhes')[0].select('strong')) > 0):
                 price = property.select('div.lista-imoveis-detalhes')[0].select('strong')[0].text.strip()
             else:
                 price = None
-            
+
             if (len(property.select('div.lista-imoveis-detalhes')[0].select('p')) > 1):
                 if ('\n' in property.select('div.lista-imoveis-detalhes')[0].select('p')[1].text):
                     small_text = property.select('div.lista-imoveis-detalhes')[0].select('p')[1].text.split('\n')
@@ -428,7 +429,7 @@ def silvio_iwata_scraper():
 
         # Property broker
         broker = 'Silvio Iwata'
-        
+
         # Property informations
         property_info = pd.DataFrame([{
             'property_url': property_url,
@@ -447,7 +448,7 @@ def silvio_iwata_scraper():
             'num_bathroom': num_bathroom,
             'num_garage': num_garage
         }])
-        
+
         displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
 
         time.sleep(0.5)
