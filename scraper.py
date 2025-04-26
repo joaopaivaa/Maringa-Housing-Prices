@@ -200,8 +200,8 @@ def lelo_scraper():
         else:
             property_url = 'URL not found'
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-            continue
+        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        #     continue
         
         # Property district
         if (len(property.select("span.list__address")) > 0):
@@ -273,14 +273,10 @@ def lelo_scraper():
         property_page = get_html(property_url)
 
         # Property latitude and longitude
-        if (all(['data-latitude', 'data-longitude']) in property_page.select_one("div.card__map-container")):
-            try:
-                lat = float(property_page.select_one("div.card__map-container")['data-latitude'])
-                long = float(property_page.select_one("div.card__map-container")['data-longitude'])
-            except:
-                lat = None
-                long = None
-        else:
+        try:
+            lat = float(property_page.select_one("div.card__map-container")['data-latitude'])
+            long = float(property_page.select_one("div.card__map-container")['data-longitude'])
+        except:
             lat = None
             long = None
         
