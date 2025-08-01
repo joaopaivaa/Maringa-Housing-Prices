@@ -200,8 +200,8 @@ def lelo_scraper():
         else:
             property_url = 'URL not found'
 
-        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-        #     continue
+        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+            continue
         
         # Property district
         if (len(property.select("span.list__address")) > 0):

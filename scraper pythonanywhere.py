@@ -9,7 +9,7 @@ import time
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print(BASE_DIR)
 
-past_properties = pd.read_csv(os.path.join(BASE_DIR, "Properties.csv"), sep=';')
+past_properties = pd.read_csv(os.path.join(BASE_DIR, "bronze/Properties.csv"), encoding='utf-8', sep=';')
 
 actual_properties_url = []
 
@@ -508,12 +508,12 @@ displayed_properties = pd.concat([displayed_properties_pedro_granado,
 displayed_properties['added_date'] = (datetime.now()).strftime("%Y-%m-%d")
 displayed_properties['sold_date'] = None
 
-past_properties[~past_properties['property_url'].isin(actual_properties_url)]['sold_date'] = (datetime.now()).strftime("%Y-%m-%d")
+past_properties.loc[~past_properties['property_url'].isin(actual_properties_url), 'sold_date'] = datetime.now().strftime("%Y-%m-%d")
 
 # Update list of properties
 past_properties = pd.concat([past_properties, displayed_properties])
 
-past_properties.to_csv(os.path.join(BASE_DIR, "Properties.csv"), sep=';', index=False)
+past_properties.to_csv(os.path.join(BASE_DIR, "bronze/Properties.csv"), sep=';', index=False)
 
 fim = time.time()
 print(f"Tempo de execução total: {fim - inicio:.6f} segundos")
