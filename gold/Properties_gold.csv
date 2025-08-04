@@ -1,4 +1,4 @@
-index;broker;district;price;type;city;state;category;area;lat;long;num_bedroom;num_bathroom;num_garage;added_date;Sold
+index;broker;district;price;type;city;state;category;area;lat;long;num_bedroom;num_bathroom;num_garage;added_date;is_sold
 1074;Pedro Granado Imóveis;Vila Nova;385000.0;Padrão;Maringá;PR;Terreno;360.0;-23.42804995454673;-51.89946911223535;;;;2025-04-16;False
 1075;Pedro Granado Imóveis;Jardim Maravilha;890000.0;Casa;Maringá;PR;Casa;309.06;-23.412676;-51.9622537;3.0;3.0;1.0;2025-04-16;False
 1076;Pedro Granado Imóveis;Parque Residencial Cidade Nova;1000000.0;Barracão;Maringá;PR;Comercial;400.0;-23.3765992;-51.9361313;;2.0;;2025-04-16;False

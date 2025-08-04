@@ -1,4 +1,4 @@
-property_url;broker;district;price;type;city;state;ref;category;area;lat;long;num_bedroom;num_bathroom;num_garage;added_date;sold_date;Sold
+property_url;broker;district;price;type;city;state;ref;category;area;lat;long;num_bedroom;num_bathroom;num_garage;added_date;sold_date;is_sold
 https://www.pedrogranado.com.br/comprar/maringa/apartamento/padrao/zona-08/05363;Pedro Granado Imóveis;Zona 08;;Padrão;Maringá;PR;5363.0;Apartamento;55.34;-23.44694053457345;-51.91969371006467;2.0;1.0;;2025-04-15;;False
 https://www.pedrogranado.com.br/comprar/maringa/apartamento/padrao/zona-01/31223;Pedro Granado Imóveis;Zona 01;90000.0;Padrão;Maringá;PR;31223.0;Apartamento;48.4;-23.4209995;-51.9330558;1.0;1.0;;2025-04-15;;False
 https://www.pedrogranado.com.br/comprar/maringa/apartamento/padrao/zona-01/35423;Pedro Granado Imóveis;Zona 01;126312.1;Padrão;Maringá;PR;35423.0;Apartamento;66.36;-23.4209995;-51.9330558;1.0;1.0;;2025-04-15;;False
