@@ -1,68 +1,66 @@
-broker;district;price;type;city;state;category;area;lat;long;num_bedroom;num_bathroom;num_garage;added_date;is_sold;days_on_market
-Pedro Granado Imóveis;Conjunto Habitacional Inocente Vila Nova Júnior;259000.0;Casa;Maringá;PR;Casa;259.02;;;3.0;3.0;1.0;2025-08-01;False;
-Pedro Granado Imóveis;Vila Vardelina;275000.0;Padrão;Maringá;PR;Apartamento;51.56;;;2.0;1.0;;2025-08-01;False;
-Pedro Granado Imóveis;Jardim Brasilia;399000.0;Sobrado;Maringá;PR;Casa;150.0;;;3.0;2.0;1.0;2025-08-01;False;
-Pedro Granado Imóveis;Jardim Novo Horizonte;;Padrão;Maringá;PR;Apartamento;68.73;;;3.0;2.0;1.0;2025-08-01;False;
-Pedro Granado Imóveis;Zona 01;1490000.0;Padrão;Maringá;PR;Apartamento;177.99;;;3.0;4.0;3.0;2025-08-01;False;
-Pedro Granado Imóveis;Zona 04;;Salão;Maringá;PR;Comercial;678.0;;;;9.0;;2025-08-01;False;
-Lelo Imóveis;Zona 06;495000.0;;Maringá;PR;Terreno;506.07;-23.4237384;-51.9621123;;;;2025-08-01;False;
-Lelo Imóveis;Jardim Alvorada;348000.0;;Maringá;PR;Apartamento;90.0;-23.3896749;-51.9081059;3.0;;1.0;2025-08-01;False;
-Pedro Granado Imóveis;Jardim Tupinambá;380000.0;Casa;Maringá;PR;Casa;423.36;;;3.0;1.0;1.0;2025-08-01;False;
-Pedro Granado Imóveis;Jardim Novo Horizonte;2950000.0;Condomínio Fechado;Maringá;PR;Casa;311.55;;;3.0;4.0;1.0;2025-08-01;False;
-Lelo Imóveis;Jardim Copacabana;390000.0;;Maringá;PR;Casa;150.0;-23.3783478;-51.9358142;3.0;;2.0;2025-08-01;False;
-Lelo Imóveis;Vila Marumby;410000.0;;Maringá;PR;Apartamento;97.79;-23.4443223;-51.9300155;3.0;;1.0;2025-08-01;False;
-Lelo Imóveis;Parque Hortencia;298000.0;;Maringá;PR;Casa;150.11;-23.3993757;-51.9737784;2.0;;;2025-08-01;False;
-Lelo Imóveis;Parque Res Cidade Nova;220000.0;;Maringá;PR;Apartamento;71.62;-23.3989953;-51.931698;3.0;;1.0;2025-08-01;False;
-Lelo Imóveis;Parque Industrial;340000.0;;Maringá;PR;Apartamento;53.0;-23.445311;-51.9719408;2.0;;1.0;2025-08-01;False;
-Lelo Imóveis;Alto Das Grevileas;199000.0;;Maringá;PR;Terreno;276.0;-23.4664412;-51.9177658;;;;2025-08-01;False;
-Silvio Iwata;Jd Das Estações;250000.0;;Maringá;PR;Apartamento;49.12;-23.4475751;-51.9806281;1.0;1.0;1.0;2025-08-01;False;
-Silvio Iwata;;300000.0;;Sarandi;PR;Terreno;393.64;-23.4920864;-51.9104086;;;;2025-08-01;False;
-Silvio Iwata;Chácaras Aeroporto;690000.0;;Maringá;PR;Terreno;400.0;-23.472089;-51.906143;;;;2025-08-01;False;
-Silvio Iwata;;1000000.0;;Maringá;PR;Terreno;;-23.4720728;-51.91108269999999;;;;2025-08-01;False;
-Silvio Iwata;Alto Das Grevileas;1280000.0;;Maringá;PR;Casa;131.73;-23.4732125;-51.9127601;3.0;4.0;2.0;2025-08-01;False;
-Silvio Iwata;Zona 06;;;Maringá;PR;Apartamento;70.87;-23.4232112;-51.9600708;3.0;2.0;2.0;2025-08-03;False;
-Pedro Granado Imóveis;Zona 07;279000.0;Padrão;Maringá;PR;Apartamento;74.0;;;2.0;2.0;1.0;2025-08-04;False;
-Pedro Granado Imóveis;Conjunto Habitacional Inocente Vila Nova Júnior;340000.0;Padrão;Maringá;PR;Terreno;315.81;;;;;;2025-08-04;False;
-Lelo Imóveis;Parque Taruma;175000.0;;Maringá;PR;Apartamento;50.59;-23.469288;-51.9171653;2.0;;1.0;2025-08-04;False;
-Lelo Imóveis;Jardim Guapore;1140000.0;;Maringá;PR;Casa;300.52;-23.4433343;-51.961929;3.0;;4.0;2025-08-04;False;
-Lelo Imóveis;Zona 07;549000.0;;Maringá;PR;Apartamento;167.63;-23.41608;-51.92942;3.0;;1.0;2025-08-04;False;
-Lelo Imóveis;Zona 07;295000.0;;Maringá;PR;Apartamento;72.24;-23.4154055;-51.9501832;2.0;;1.0;2025-08-04;False;
-Lelo Imóveis;Jardim Oriental;650000.0;;Maringá;PR;Casa;100.0;-23.3705265;-51.9469481;3.0;;2.0;2025-08-04;False;
-Lelo Imóveis;Zona 03;751907.0;;Maringá;PR;Apartamento;131.64;-23.4291232;-51.9227498;3.0;;1.0;2025-08-04;False;
-Lelo Imóveis;Zona 08;850000.0;;Maringá;PR;Apartamento;146.36;-23.4297742;-51.9159322;;;;2025-08-04;False;
-Lelo Imóveis;Zona 04;2350000.0;;Maringá;PR;Casa;278.0;-23.4319894;-51.951368;3.0;;3.0;2025-08-04;False;
-Pedro Granado Imóveis;Jardim Paulista;285000.0;Casa;Maringá;PR;Casa;99.17;;;2.0;1.0;;2025-08-05;False;
-Pedro Granado Imóveis;Zona 01;300000.0;Sala Edcond;Maringá;PR;Comercial;43.3;;;;1.0;;2025-08-05;False;
-Pedro Granado Imóveis;Parque Das Laranjeiras;300000.0;Casa;Maringá;PR;Casa;302.38;;;3.0;1.0;;2025-08-05;False;
-Pedro Granado Imóveis;Zona 07;990000.0;Sobrado;Maringá;PR;Casa;519.3;;;6.0;5.0;3.0;2025-08-05;False;
-Pedro Granado Imóveis;Zona 01;1100000.0;Padrão;Maringá;PR;Apartamento;111.0;;;3.0;2.0;1.0;2025-08-05;False;
-Lelo Imóveis;Parque Das Grevileas 3A Parte;395000.0;;Maringá;PR;Casa;135.96;-23.3902889;-51.9240476;3.0;;1.0;2025-08-05;False;
-Silvio Iwata;Jd América;;;Maringá;PR;Apartamento;43.46;-23.4248398;-51.8920816;2.0;1.0;1.0;2025-08-05;False;
-Silvio Iwata;;278000.0;;Maringá;PR;Terreno;450.0;-23.3937835;-51.9073289;;;;2025-08-05;False;
-Silvio Iwata;;278000.0;;Maringá;PR;Terreno;450.0;-23.3938963;-51.9074015;;;;2025-08-05;False;
-Silvio Iwata;;350000.0;;Maringá;PR;Casa;184.87;-23.3861356;-51.9042294;4.0;3.0;2.0;2025-08-05;False;
-Silvio Iwata;;720000.0;;Maringá;PR;Terreno;600.0;-23.4073369;-51.9291168;;;;2025-08-05;False;
-Silvio Iwata;;750000.0;;Maringá;PR;Casa;134.69;-23.3654624;-51.9418198;3.0;3.0;2.0;2025-08-05;False;
-Pedro Granado Imóveis;Jardim Solimões;160000.0;Padrão;Maringá;PR;Terreno;200.0;;;;;;2025-08-06;False;
-Pedro Granado Imóveis;Jardim Solimões;160000.0;Padrão;Maringá;PR;Terreno;200.0;;;;;;2025-08-06;False;
-Pedro Granado Imóveis;Jardim Universitário;365000.0;Padrão;Maringá;PR;Apartamento;48.44;;;2.0;2.0;1.0;2025-08-06;False;
-Pedro Granado Imóveis;Bom Jardim;400000.0;Padrão;Maringá;PR;Terreno;400.0;;;;;;2025-08-06;False;
-Pedro Granado Imóveis;Zona 01;605000.0;Padrão;Maringá;PR;Apartamento;45.61;;;2.0;1.0;;2025-08-06;False;
-Pedro Granado Imóveis;Zona 08;;Padrão;Maringá;PR;Apartamento;79.41;;;2.0;2.0;1.0;2025-08-06;False;
-Pedro Granado Imóveis;Zona 01;1680000.0;Padrão;Maringá;PR;Apartamento;112.0;;;3.0;5.0;3.0;2025-08-06;False;
-Pedro Granado Imóveis;Zona 01;3450000.0;Padrão;Maringá;PR;Apartamento;207.2;;;3.0;5.0;3.0;2025-08-06;False;
-Lelo Imóveis;Zona 01;650000.0;;Maringá;PR;Apartamento;127.0;-23.4219;-51.9462824;;;;2025-08-06;False;
-Lelo Imóveis;Conj Inocente Vila Nova Junior;1249000.0;;Maringá;PR;Casa;262.0;-23.4416407;-51.9556345;3.0;;2.0;2025-08-06;True;1.0
-Lelo Imóveis;Parque Das Grevileas I Parte;830000.0;;Maringá;PR;Casa;355.57;-23.3790485;-51.9326882;3.0;;;2025-08-06;False;
-Lelo Imóveis;Parque Das Grevileas I Parte;830000.0;;Maringá;PR;Apartamento;355.57;-23.3790485;-51.9326882;3.0;;;2025-08-06;False;
-Lelo Imóveis;Parque Das Grevileas I Parte;830000.0;;Maringá;PR;Comercial;355.57;-23.3790485;-51.9326882;;;;2025-08-06;False;
-Lelo Imóveis;Zona 07;320000.0;;Maringá;PR;Apartamento;74.16;-23.4105412;-51.9329029;3.0;;1.0;2025-08-06;False;
-Silvio Iwata;Chácaras Aeroporto;500000.0;;Maringá;PR;Terreno;450.12;-23.466482;-51.897067;;;;2025-08-06;False;
-Silvio Iwata;Porto Rico;1500000.0;;Porto Rico;PR;Terreno;457.41;-22.770693;-53.268537;;;;2025-08-06;False;
-Pedro Granado Imóveis;Zona 7;;Kitnet;Maringá;PR;Apartamento;18.4;;;1.0;1.0;;2025-08-07;False;
-Pedro Granado Imóveis;Parque Residencial Cidade Nova;930000.0;Casa;Maringá;PR;Casa;;;;1.0;1.0;;2025-08-07;False;
-Pedro Granado Imóveis;Zona 03;1195000.0;Padrão;Maringá;PR;Apartamento;101.0;;;3.0;2.0;1.0;2025-08-07;False;
-Lelo Imóveis;Zona 07;319000.0;;Maringá;PR;Apartamento;126.19;-23.4079841;-51.9405787;3.0;;1.0;2025-08-07;False;
-Lelo Imóveis;Jardim Guapore;1249000.0;;Maringá;PR;Casa;262.0;-23.4416407;-51.9556345;3.0;;2.0;2025-08-07;False;
-Silvio Iwata;Zona 06;235000.0;;Maringá;PR;Apartamento;47.92;-23.4283079;-51.9719695;2.0;2.0;1.0;2025-08-07;False;
-Silvio Iwata;Jardins De Monet Residence;640000.0;;Maringá;PR;Terreno;556.46;-23.3605074;-52.0084744;;;;2025-08-07;False;
+broker;district;price;type;category;area;lat;long;num_bedroom;num_bathroom;num_garage;added_date;sold_date;is_sold;days_on_market;price_per_m2
+Pedro Granado Imóveis;Conjunto Habitacional Inocente Vila Nova Júnior;259000.0;Casa;Casa;259.02;;;3.0;3.0;1.0;2025-08-01;;False;;999.92278588526
+Pedro Granado Imóveis;Vila Vardelina;275000.0;Padrão;Apartamento;51.56;;;2.0;1.0;;2025-08-01;;False;;5333.591931730023
+Pedro Granado Imóveis;Jardim Brasilia;399000.0;Sobrado;Casa;150.0;;;3.0;2.0;1.0;2025-08-01;;False;;2660.0
+Pedro Granado Imóveis;Jardim Novo Horizonte;;Padrão;Apartamento;68.73;;;3.0;2.0;1.0;2025-08-01;;False;;
+Pedro Granado Imóveis;Zona 01;1490000.0;Padrão;Apartamento;177.99;;;3.0;4.0;3.0;2025-08-01;;False;;8371.25681218046
+Pedro Granado Imóveis;Zona 04;;Salão;Comercial;678.0;;;;9.0;;2025-08-01;;False;;
+Lelo Imóveis;Zona 06;495000.0;;Terreno;506.07;-23.4237384;-51.9621123;;;;2025-08-01;;False;;978.1255557531568
+Lelo Imóveis;Jardim Alvorada;348000.0;;Apartamento;90.0;-23.3896749;-51.9081059;3.0;;1.0;2025-08-01;;False;;3866.6666666666665
+Pedro Granado Imóveis;Jardim Tupinambá;380000.0;Casa;Casa;423.36;;;3.0;1.0;1.0;2025-08-01;;False;;897.5812547241119
+Pedro Granado Imóveis;Jardim Novo Horizonte;2950000.0;Condomínio Fechado;Casa;311.55;;;3.0;4.0;1.0;2025-08-01;;False;;9468.785106724445
+Lelo Imóveis;Jardim Copacabana;390000.0;;Casa;150.0;-23.3783478;-51.9358142;3.0;;2.0;2025-08-01;;False;;2600.0
+Lelo Imóveis;Vila Marumby;410000.0;;Apartamento;97.79;-23.4443223;-51.9300155;3.0;;1.0;2025-08-01;;False;;4192.657735964823
+Lelo Imóveis;Parque Hortencia;298000.0;;Casa;150.11;-23.3993757;-51.9737784;2.0;;;2025-08-01;;False;;1985.2108453800545
+Lelo Imóveis;Parque Res Cidade Nova;220000.0;;Apartamento;71.62;-23.3989953;-51.931698;3.0;;1.0;2025-08-01;;False;;3071.76766266406
+Lelo Imóveis;Parque Industrial;340000.0;;Apartamento;53.0;-23.445311;-51.9719408;2.0;;1.0;2025-08-01;;False;;6415.094339622641
+Lelo Imóveis;Alto Das Grevileas;199000.0;;Terreno;276.0;-23.4664412;-51.9177658;;;;2025-08-01;;False;;721.0144927536232
+Silvio Iwata;Jd Das Estações;250000.0;;Apartamento;49.12;-23.4475751;-51.9806281;1.0;1.0;1.0;2025-08-01;;False;;5089.576547231271
+Silvio Iwata;Chácaras Aeroporto;690000.0;;Terreno;400.0;-23.472089;-51.906143;;;;2025-08-01;;False;;1725.0
+Silvio Iwata;;1000000.0;;Terreno;;-23.4720728;-51.91108269999999;;;;2025-08-01;;False;;
+Silvio Iwata;Alto Das Grevileas;1280000.0;;Casa;131.73;-23.4732125;-51.9127601;3.0;4.0;2.0;2025-08-01;;False;;9716.845061868977
+Silvio Iwata;Zona 06;;;Apartamento;70.87;-23.4232112;-51.9600708;3.0;2.0;2.0;2025-08-03;;False;;
+Pedro Granado Imóveis;Zona 07;279000.0;Padrão;Apartamento;74.0;;;2.0;2.0;1.0;2025-08-04;;False;;3770.2702702702704
+Pedro Granado Imóveis;Conjunto Habitacional Inocente Vila Nova Júnior;340000.0;Padrão;Terreno;315.81;;;;;;2025-08-04;;False;;1076.5966878819545
+Lelo Imóveis;Parque Taruma;175000.0;;Apartamento;50.59;-23.469288;-51.9171653;2.0;;1.0;2025-08-04;;False;;3459.1816564538444
+Lelo Imóveis;Jardim Guapore;1140000.0;;Casa;300.52;-23.4433343;-51.961929;3.0;;4.0;2025-08-04;;False;;3793.4247304671903
+Lelo Imóveis;Zona 07;549000.0;;Apartamento;167.63;-23.41608;-51.92942;3.0;;1.0;2025-08-04;;False;;3275.070094851757
+Lelo Imóveis;Zona 07;295000.0;;Apartamento;72.24;-23.4154055;-51.9501832;2.0;;1.0;2025-08-04;;False;;4083.610188261351
+Lelo Imóveis;Jardim Oriental;650000.0;;Casa;100.0;-23.3705265;-51.9469481;3.0;;2.0;2025-08-04;;False;;6500.0
+Lelo Imóveis;Zona 03;751907.0;;Apartamento;131.64;-23.4291232;-51.9227498;3.0;;1.0;2025-08-04;;False;;5711.842904892131
+Lelo Imóveis;Zona 08;850000.0;;Apartamento;146.36;-23.4297742;-51.9159322;;;;2025-08-04;;False;;5807.597704290789
+Lelo Imóveis;Zona 04;2350000.0;;Casa;278.0;-23.4319894;-51.951368;3.0;;3.0;2025-08-04;;False;;8453.237410071943
+Pedro Granado Imóveis;Jardim Paulista;285000.0;Casa;Casa;99.17;;;2.0;1.0;;2025-08-05;;False;;2873.8529797317738
+Pedro Granado Imóveis;Zona 01;300000.0;Sala Edcond;Comercial;43.3;;;;1.0;;2025-08-05;;False;;6928.406466512703
+Pedro Granado Imóveis;Parque Das Laranjeiras;300000.0;Casa;Casa;302.38;;;3.0;1.0;;2025-08-05;;False;;992.12910906806
+Pedro Granado Imóveis;Zona 07;990000.0;Sobrado;Casa;519.3;;;6.0;5.0;3.0;2025-08-05;;False;;1906.412478336222
+Pedro Granado Imóveis;Zona 01;1100000.0;Padrão;Apartamento;111.0;;;3.0;2.0;1.0;2025-08-05;;False;;9909.90990990991
+Lelo Imóveis;Parque Das Grevileas 3A Parte;395000.0;;Casa;135.96;-23.3902889;-51.9240476;3.0;;1.0;2025-08-05;;False;;2905.2662547808177
+Silvio Iwata;Jd América;;;Apartamento;43.46;-23.4248398;-51.8920816;2.0;1.0;1.0;2025-08-05;;False;;
+Silvio Iwata;;278000.0;;Terreno;450.0;-23.3937835;-51.9073289;;;;2025-08-05;;False;;617.7777777777778
+Silvio Iwata;;278000.0;;Terreno;450.0;-23.3938963;-51.9074015;;;;2025-08-05;;False;;617.7777777777778
+Silvio Iwata;;350000.0;;Casa;184.87;-23.3861356;-51.9042294;4.0;3.0;2.0;2025-08-05;;False;;1893.222264293828
+Silvio Iwata;;720000.0;;Terreno;600.0;-23.4073369;-51.9291168;;;;2025-08-05;;False;;1200.0
+Silvio Iwata;;750000.0;;Casa;134.69;-23.3654624;-51.9418198;3.0;3.0;2.0;2025-08-05;;False;;5568.342118939788
+Pedro Granado Imóveis;Jardim Solimões;160000.0;Padrão;Terreno;200.0;;;;;;2025-08-06;;False;;800.0
+Pedro Granado Imóveis;Jardim Solimões;160000.0;Padrão;Terreno;200.0;;;;;;2025-08-06;;False;;800.0
+Pedro Granado Imóveis;Jardim Universitário;365000.0;Padrão;Apartamento;48.44;;;2.0;2.0;1.0;2025-08-06;;False;;7535.094962840628
+Pedro Granado Imóveis;Bom Jardim;400000.0;Padrão;Terreno;400.0;;;;;;2025-08-06;;False;;1000.0
+Pedro Granado Imóveis;Zona 01;605000.0;Padrão;Apartamento;45.61;;;2.0;1.0;;2025-08-06;;False;;13264.634948476212
+Pedro Granado Imóveis;Zona 08;;Padrão;Apartamento;79.41;;;2.0;2.0;1.0;2025-08-06;;False;;
+Pedro Granado Imóveis;Zona 01;1680000.0;Padrão;Apartamento;112.0;;;3.0;5.0;3.0;2025-08-06;;False;;15000.0
+Pedro Granado Imóveis;Zona 01;3450000.0;Padrão;Apartamento;207.2;;;3.0;5.0;3.0;2025-08-06;;False;;16650.579150579153
+Lelo Imóveis;Zona 01;650000.0;;Apartamento;127.0;-23.4219;-51.9462824;;;;2025-08-06;;False;;5118.110236220473
+Lelo Imóveis;Conj Inocente Vila Nova Junior;1249000.0;;Casa;262.0;-23.4416407;-51.9556345;3.0;;2.0;2025-08-06;2025-08-07;True;1.0;4767.175572519084
+Lelo Imóveis;Parque Das Grevileas I Parte;830000.0;;Casa;355.57;-23.3790485;-51.9326882;3.0;;;2025-08-06;;False;;2334.280169868099
+Lelo Imóveis;Parque Das Grevileas I Parte;830000.0;;Apartamento;355.57;-23.3790485;-51.9326882;3.0;;;2025-08-06;;False;;2334.280169868099
+Lelo Imóveis;Parque Das Grevileas I Parte;830000.0;;Comercial;355.57;-23.3790485;-51.9326882;;;;2025-08-06;;False;;2334.280169868099
+Lelo Imóveis;Zona 07;320000.0;;Apartamento;74.16;-23.4105412;-51.9329029;3.0;;1.0;2025-08-06;;False;;4314.994606256742
+Silvio Iwata;Chácaras Aeroporto;500000.0;;Terreno;450.12;-23.466482;-51.897067;;;;2025-08-06;;False;;1110.814893806096
+Pedro Granado Imóveis;Zona 7;;Kitnet;Apartamento;18.4;;;1.0;1.0;;2025-08-07;;False;;
+Pedro Granado Imóveis;Parque Residencial Cidade Nova;930000.0;Casa;Casa;;;;1.0;1.0;;2025-08-07;;False;;
+Pedro Granado Imóveis;Zona 03;1195000.0;Padrão;Apartamento;101.0;;;3.0;2.0;1.0;2025-08-07;;False;;11831.683168316831
+Lelo Imóveis;Zona 07;319000.0;;Apartamento;126.19;-23.4079841;-51.9405787;3.0;;1.0;2025-08-07;;False;;2527.934067675727
+Lelo Imóveis;Jardim Guapore;1249000.0;;Casa;262.0;-23.4416407;-51.9556345;3.0;;2.0;2025-08-07;;False;;4767.175572519084
+Silvio Iwata;Zona 06;235000.0;;Apartamento;47.92;-23.4283079;-51.9719695;2.0;2.0;1.0;2025-08-07;;False;;4904.006677796327
+Silvio Iwata;Jardins De Monet Residence;640000.0;;Terreno;556.46;-23.3605074;-52.0084744;;;;2025-08-07;;False;;1150.1275922797684
