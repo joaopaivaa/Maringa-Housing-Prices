@@ -5,11 +5,13 @@ import re
 import os
 from datetime import datetime
 import time
+import numpy as np
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print(BASE_DIR)
 
 past_properties = pd.read_csv(os.path.join(BASE_DIR, "bronze/Properties.csv"), encoding='utf-8', sep=';')
+past_properties_images = pd.read_csv(os.path.join(BASE_DIR, "bronze/Properties Images.csv"), encoding='utf-8', sep=';')
 
 actual_properties_url = []
 
@@ -24,6 +26,7 @@ def pedro_granado_scraper():
     # Pedro Granado Imóveis
 
     displayed_properties = pd.DataFrame()
+    properties_images = pd.DataFrame()
 
     main_page = get_html("https://www.pedrogranado.com.br/pesquisa-de-imoveis/?locacao_venda=V&id_cidade%5B%5D=35&ordem=1")
     num_properties = int(re.search(r"(?<=\()\d+(?=\))", main_page.select("option")[4].text).group())
@@ -47,7 +50,9 @@ def pedro_granado_scraper():
         else:
             property_url = 'URL not found'
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        #     continue
+        if (property_url == 'URL not found'):
             continue
 
         # Property district
@@ -142,6 +147,22 @@ def pedro_granado_scraper():
             lat = None
             long = None
 
+        # Property images
+        if (len(property_page.select('#imageGallery')) > 0):
+
+            images = property_page.select('#imageGallery')[0].select('img')
+            images = [image['src'] for image in images]
+            images = list(set(images))
+
+            if (len(images) > 0):
+                for image in images:
+                    property_images = pd.DataFrame([{
+                        'property_url': property_url,
+                        'image_url': image,
+                        'order': [i for i, img in enumerate(images) if img == image][0]
+                    }])
+                    properties_images = pd.concat([properties_images, property_images], ignore_index=True)
+
         # Property broker
         broker = 'Pedro Granado Imóveis'
 
@@ -168,13 +189,14 @@ def pedro_granado_scraper():
 
         time.sleep(0.5)
 
-    return displayed_properties
+    return displayed_properties, properties_images
 
 def lelo_scraper():
 
     # Lelo Imóveis
 
     displayed_properties = pd.DataFrame()
+    properties_images = pd.DataFrame()
 
     main_page = get_html("https://www.leloimoveis.com.br/imoveis/venda-maringa")
     num_properties = int(re.search(r"\d+", main_page.select_one("strong.list__highlight").text).group())
@@ -198,7 +220,9 @@ def lelo_scraper():
         else:
             property_url = 'URL not found'
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        #     continue
+        if (property_url == 'URL not found'):
             continue
 
         # Property district
@@ -278,6 +302,22 @@ def lelo_scraper():
             lat = None
             long = None
 
+        # Property images
+        if (len(property_page.select('div.card__photo-box')) > 0):
+            
+            images = property_page.select('div.card__photo-box')[0].select('img')
+            images = [image['src'] for image in images]
+            images = list(set(images))
+
+            if (len(images) > 0):
+                for image in images:
+                    property_images = pd.DataFrame([{
+                        'property_url': property_url,
+                        'image_url': image,
+                        'order': [i for i, img in enumerate(images) if img == image][0]
+                    }])
+                    properties_images = pd.concat([properties_images, property_images], ignore_index=True)
+
         # Property broker
         broker = 'Lelo Imóveis'
 
@@ -304,13 +344,14 @@ def lelo_scraper():
 
         time.sleep(0.5)
 
-    return displayed_properties
+    return displayed_properties, properties_images
 
 def silvio_iwata_scraper():
 
     # Silvio Iwata Imóveis
 
     displayed_properties = pd.DataFrame()
+    properties_images = pd.DataFrame()
 
     main_page = get_html("https://www.silvioiwata.com.br/imoveis/venda")
     num_properties = int(re.search(r"\d+", main_page.select_one("p.cor-primaria").text).group())
@@ -334,7 +375,9 @@ def silvio_iwata_scraper():
         else:
             property_url = 'URL not found'
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+        #     continue
+        if (property_url == 'URL not found'):
             continue
 
         # Property district, city and state
@@ -423,6 +466,22 @@ def silvio_iwata_scraper():
             lat = None
             long = None
 
+        # Property images
+        if (len(property_page.select('div.slider')) > 0):
+            
+            images = property_page.select('div.slider')[0].select('img')
+            images = [image['src'] for image in images]
+            images = list(set(images))
+
+            if (len(images) > 0):
+                for image in images:
+                    property_images = pd.DataFrame([{
+                        'property_url': property_url,
+                        'image_url': image,
+                        'order': [i for i, img in enumerate(images) if img == image][0]
+                    }])
+                    properties_images = pd.concat([properties_images, property_images], ignore_index=True)
+
         # Property broker
         broker = 'Silvio Iwata'
 
@@ -449,7 +508,7 @@ def silvio_iwata_scraper():
 
         time.sleep(0.5)
 
-    return displayed_properties
+    return displayed_properties, properties_images
 
 # Execute scraper
 
@@ -458,11 +517,11 @@ inicio_PG = time.time()
 
 # Scrapes Pedro Granado Imóveis
 try:
-    displayed_properties_pedro_granado = pedro_granado_scraper()
+    displayed_properties_pedro_granado, properties_images_pedro_granado = pedro_granado_scraper()
 except:
     max_tries = 2
     for i in range(max_tries):
-        displayed_properties_pedro_granado = pedro_granado_scraper()
+        displayed_properties_pedro_granado, properties_images_pedro_granado = pedro_granado_scraper()
         break
 
 fim = time.time()
@@ -474,11 +533,11 @@ inicio_LE = time.time()
 
 # Scrapes Lelo Imóveis
 try:
-    displayed_properties_lelo = lelo_scraper()
+    displayed_properties_lelo, properties_images_lelo = lelo_scraper()
 except:
     max_tries = 2
     for i in range(max_tries):
-        displayed_properties_lelo = lelo_scraper()
+        displayed_properties_lelo, properties_images_lelo = lelo_scraper()
         break
 
 fim = time.time()
@@ -490,17 +549,19 @@ inicio_SI = time.time()
 
 # Scrapes Silvio Iwata Imóveis
 try:
-    displayed_properties_silvio_iwata = silvio_iwata_scraper()
+    displayed_properties_silvio_iwata, properties_images_silvio_iwata = silvio_iwata_scraper()
 except:
     max_tries = 2
     for i in range(max_tries):
-        displayed_properties_silvio_iwata = silvio_iwata_scraper()
+        displayed_properties_silvio_iwata, properties_images_silvio_iwata = silvio_iwata_scraper()
         break
 
 fim = time.time()
 print('\nSilvio Iwata Imóveis')
 print(f'Número de imoveis: {len(displayed_properties_silvio_iwata)}')
 print(f"Tempo de execução: {round(fim - inicio_SI, 2)} segundos")
+
+# Properties data ###################################################################################
 
 displayed_properties = pd.concat([displayed_properties_pedro_granado,
                                   displayed_properties_lelo,
@@ -512,8 +573,17 @@ past_properties.loc[~past_properties['property_url'].isin(actual_properties_url)
 
 # Update list of properties
 past_properties = pd.concat([past_properties, displayed_properties])
-
 past_properties.to_csv(os.path.join(BASE_DIR, "bronze/Properties.csv"), sep=';', index=False)
+
+# Images data ######################################################################################
+
+properties_images = pd.concat([properties_images_pedro_granado,
+                               properties_images_lelo,
+                               properties_images_silvio_iwata], ignore_index=True)
+
+# Update list of images
+past_properties_images = pd.concat([past_properties_images, properties_images], ignore_index=True)
+past_properties_images.to_csv(os.path.join(BASE_DIR, "bronze/Properties Images.csv"), sep=';', index=False)
 
 fim = time.time()
 print(f"Tempo de execução total: {fim - inicio:.6f} segundos")
