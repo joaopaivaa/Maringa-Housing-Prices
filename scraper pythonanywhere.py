@@ -50,9 +50,7 @@ def pedro_granado_scraper():
         else:
             property_url = 'URL not found'
 
-        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-        #     continue
-        if (property_url == 'URL not found'):
+        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
             continue
 
         # Property district
@@ -220,9 +218,7 @@ def lelo_scraper():
         else:
             property_url = 'URL not found'
 
-        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-        #     continue
-        if (property_url == 'URL not found'):
+        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
             continue
 
         # Property district
@@ -375,9 +371,7 @@ def silvio_iwata_scraper():
         else:
             property_url = 'URL not found'
 
-        # if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-        #     continue
-        if (property_url == 'URL not found'):
+        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
             continue
 
         # Property district, city and state
