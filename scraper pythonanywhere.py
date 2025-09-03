@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 import numpy as np
 
@@ -300,7 +300,7 @@ def lelo_scraper():
 
         # Property images
         if (len(property_page.select('div.card__photo-box')) > 0):
-            
+
             images = property_page.select('div.card__photo-box')[0].select('img')
             images = [image['src'] for image in images]
             images = list(set(images))
@@ -462,7 +462,7 @@ def silvio_iwata_scraper():
 
         # Property images
         if (len(property_page.select('div.slider')) > 0):
-            
+
             images = property_page.select('div.slider')[0].select('img')
             images = [image['src'] for image in images]
             images = list(set(images))
@@ -561,9 +561,11 @@ displayed_properties = pd.concat([displayed_properties_pedro_granado,
                                   displayed_properties_lelo,
                                   displayed_properties_silvio_iwata], ignore_index=True)
 displayed_properties['added_date'] = (datetime.now()).strftime("%Y-%m-%d")
+#displayed_properties['added_date'] = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 displayed_properties['sold_date'] = None
 
 past_properties.loc[~past_properties['property_url'].isin(actual_properties_url), 'sold_date'] = datetime.now().strftime("%Y-%m-%d")
+#past_properties.loc[~past_properties['property_url'].isin(actual_properties_url), 'sold_date'] = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
 # Update list of properties
 past_properties = pd.concat([past_properties, displayed_properties])
