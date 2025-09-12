@@ -1,8 +1,3 @@
-dashboard_maringahousing.pbix
-modelo_semantico_maringa_housing.pbix
-auto_push.sh
-run_auto_push.py
-
-properties_images/
-
 venv
+properties_images/
+images download.ipynb
