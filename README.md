@@ -35,13 +35,13 @@ Gold layer database is saved as a csv file.
 
 Available properties: Properties currently available at the real estate agencies' website.
 
-Added date = Date in which the property first appeared on the real state agency's website.
+Added date: Date in which the property first appeared on the real state agency's website.
 
 Sold properties: Properties that were available at the real state agencies' website but aren't anymore, so property removed = property sold.
 
-Sold date = Date in which the property was removed from the real state agency's website.
+Sold date: Date in which the property was removed from the real state agency's website.
 
-Time on market (days) = Sold date - Added date
+Time on market (days): Sold date - Added date
 
 ### Visualization
 
