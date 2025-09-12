@@ -45,6 +45,8 @@ Time on market (days): Sold date - Added date
 
 ### Visualization
 
+https://app.powerbi.com/view?r=eyJrIjoiMTFmNDc0NjQtNjE0OC00YTFhLWEzODQtNjUxYjE5MzcwMWJkIiwidCI6ImQ5YTJlMjFkLTBiMzctNDRlMS1hZmEyLWZjN2VlYzVmODQ4MCJ9&pageName=b4065bdac15bd9f86ad6
+
 #### Home page
 
 <img width="1334" height="744" alt="image" src="https://github.com/user-attachments/assets/bf641160-b456-43ea-9725-6153d46d6731" />
