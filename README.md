@@ -1,4 +1,4 @@
-# Maringá Housing Prices
+# Maringá Housing Prices :office: :chart_with_upwards_trend:
 
 Author: João Paiva.
 
@@ -6,7 +6,7 @@ Contact: joaopaiva.datascience@gmail.com.
 
 Github: https://github.com/joaopaivaa.
 
-## ETL
+## :inbox_tray: ETL
 
 ### E - Extraction
 
@@ -29,7 +29,7 @@ Gold layer transformation:
 
 Gold layer database is saved as a csv file.
 
-## Dashboard
+## :bar_chart: Dashboard
 
 ### Methodology
 
