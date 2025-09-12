@@ -45,7 +45,7 @@ Time on market (days): Sold date - Added date
 
 ### Visualization
 
-https://app.powerbi.com/view?r=eyJrIjoiMTFmNDc0NjQtNjE0OC00YTFhLWEzODQtNjUxYjE5MzcwMWJkIiwidCI6ImQ5YTJlMjFkLTBiMzctNDRlMS1hZmEyLWZjN2VlYzVmODQ4MCJ9&pageName=b4065bdac15bd9f86ad6
+👉 [Open the dashboard here](https://app.powerbi.com/view?r=eyJrIjoiMTFmNDc0NjQtNjE0OC00YTFhLWEzODQtNjUxYjE5MzcwMWJkIiwidCI6ImQ5YTJlMjFkLTBiMzctNDRlMS1hZmEyLWZjN2VlYzVmODQ4MCJ9&pageName=b4065bdac15bd9f86ad6)
 
 #### Home page
 
