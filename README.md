@@ -1,7 +1,9 @@
 # Maringá Housing Prices :office: :chart_with_upwards_trend:
 
 Author: João Paiva.
+
 Contact: joaopaiva.datascience@gmail.com.
+
 Github: https://github.com/joaopaivaa.
 
 ## :inbox_tray: ETL
