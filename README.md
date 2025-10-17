@@ -1,9 +1,7 @@
 # Maringá Housing Prices :office: :chart_with_upwards_trend:
 
 Author: João Paiva.
-
 Contact: joaopaiva.datascience@gmail.com.
-
 Github: https://github.com/joaopaivaa.
 
 ## :inbox_tray: ETL
@@ -23,7 +21,7 @@ Silver layer transformation:
 * Exclusion of NaN values based on "district" and "price" columns.
 
 Gold layer transformation:
-* Join between properties database and districts geometry dimension base on properties coordinates.
+* Join between properties database and districts geometry dimension based on the properties coordinates.
 
 ### L - Load
 
