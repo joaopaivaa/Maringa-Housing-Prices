@@ -23,7 +23,7 @@ Silver layer transformation:
 * Exclusion of NaN values based on "district" and "price" columns.
 
 Gold layer transformation:
-* Join between properties database and districts geometry dimension base on properties coordinates.
+* Join between properties database and districts geometry dimension based on the properties coordinates.
 
 ### L - Load
 
@@ -34,12 +34,18 @@ Gold layer database is saved as a csv file.
 ### Methodology
 
 Available properties: Properties currently available at the real estate agencies' website.
-Added date = Date in which the property first appeared on the real state agency's website.
+
+Added date: Date in which the property first appeared on the real state agency's website.
+
 Sold properties: Properties that were available at the real state agencies' website but aren't anymore, so property removed = property sold.
-Sold date = Date in which the property was removed from the real state agency's website.
-Time on market (days) = Sold date - Added date
+
+Sold date: Date in which the property was removed from the real state agency's website.
+
+Time on market (days): Sold date - Added date
 
 ### Visualization
+
+👉 [Open the dashboard here](https://app.powerbi.com/view?r=eyJrIjoiMTFmNDc0NjQtNjE0OC00YTFhLWEzODQtNjUxYjE5MzcwMWJkIiwidCI6ImQ5YTJlMjFkLTBiMzctNDRlMS1hZmEyLWZjN2VlYzVmODQ4MCJ9&pageName=b4065bdac15bd9f86ad6)
 
 #### Home page
 
