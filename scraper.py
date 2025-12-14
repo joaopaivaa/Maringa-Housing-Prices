@@ -3,9 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 import time
-import numpy as np
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print(BASE_DIR)
@@ -133,17 +132,27 @@ def pedro_granado_scraper():
         property_page = get_html(property_url)
 
         # Property latitude and longitude
-        if (len(property_page.select("iframe")) > 1):
-            lat_long_src = property_page.select("iframe")[1]['src']
+        scripts = property_page.find_all("script")
+        for script in scripts:
+
             try:
-                lat = float(re.search(r"(?<=latIni=)-?\d+\.\d+", lat_long_src).group())
-                long = float(re.search(r"(?<=longIni=)-?\d+\.\d+", lat_long_src).group())
+                if script.string and "const lat" in script.string:
+                    lat_match = re.search(r'const\s+lat\s*=\s*"([^"]+)"', script.string)
+                    lng_match = re.search(r'const\s+lng\s*=\s*"([^"]+)"', script.string)
+
+                    if lat_match and lng_match:
+                        lat = float(lat_match.group(1))
+                        long = float(lng_match.group(1))
+                        break
+                    else:
+                        lat = None
+                        long = None
+                else:
+                    lat = None
+                    long = None
             except:
-                lat = None
-                long = None
-        else:
-            lat = None
-            long = None
+                    lat = None
+                    long = None
 
         # Property images
         if (len(property_page.select('#imageGallery')) > 0):
@@ -225,7 +234,7 @@ def lelo_scraper():
 
         # Property price
         if (len(property.select("span.properties__price.number")) > 0):
-            price = property.select("span.properties__price.number")[0].text.strip().replace('.', '').replace(',', '.')
+            price = property.select("span.properties__price.number")[0].text.strip()
         else:
             price = None
 
@@ -258,8 +267,8 @@ def lelo_scraper():
             state = None
 
         # Property area
-        if (len(property.select("div.properties__item")) > 0) and (len(property.select("div.properties__item")[0].select('span.number')) > 0) and (len(property.select("div.properties__item")[0].select('span.number')[0].text.replace('.', '').replace(',', '.').replace('m²', '').strip()) > 0):
-            area = property.select("div.properties__item")[0].select('span.number')[0].text.replace('.', '').replace(',', '.').replace('m²', '').strip()
+        if (len(property.select("div.properties__item")) > 0) and (len(property.select("div.properties__item")[0].select('span.number')) > 0) and (len(property.select("div.properties__item")[0].select('span.number')[0].text.strip()) > 0):
+            area = property.select("div.properties__item")[0].select('span.number')[0].text.strip()
         else:
             area = None
 
