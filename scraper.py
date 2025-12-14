@@ -197,8 +197,7 @@ def lelo_scraper():
     properties_images = pd.DataFrame()
 
     main_page = get_html("https://www.leloimoveis.com.br/imoveis/venda-maringa")
-    num_properties = int(re.search(r"\d+", main_page.select_one("strong.list__highlight").text).group())
-    num_pages = -(-num_properties // 16)
+    num_pages = int(re.search(r"\d+", main_page.select_one("div.properties__pagination-count").select_one("span.number").text).group())
 
     properties = []
     for j in range(1, num_pages + 1):
@@ -206,7 +205,7 @@ def lelo_scraper():
         page_url = f"https://www.leloimoveis.com.br/imoveis/venda-maringa-pagina-{j}"
         main_page = get_html(page_url)
 
-        properties += main_page.select('div.list__hover')
+        properties += main_page.select('div.jetgrid.jetgrid--container.properties__container.grid')[0].select('div.properties__card')
 
     for property in properties:
 
@@ -222,38 +221,32 @@ def lelo_scraper():
             continue
 
         # Property district
-        if (len(property.select("span.list__address")) > 0):
-            if ('-' in property.select("span.list__address")[0].text):
-                district = property.select("span.list__address")[0].text.split("-")[0].strip()
-            else:
-                district = None
-        else:
-            district = None
+        district = None
 
         # Property price
-        if (len(property.select("span.list__price")) > 0):
-            price = property.select("span.list__price")[0].text.strip()
+        if (len(property.select("span.properties__price.number")) > 0):
+            price = property.select("span.properties__price.number")[0].text.strip().replace('.', '').replace(',', '.')
         else:
             price = None
 
         # Property category
-        if (len(property.select("span.list__type")) > 0) and (len(property.select("span.list__type")[0].text.strip().split()) > 0):
-            category = property.select("span.list__type")[0].text.strip().split()[0]
+        if (len(property.select("span.properties__type")) > 0) and (len(property.select("span.properties__type")[0].text.strip().split()) > 0):
+            category = property.select("span.properties__type")[0].text.strip().split()[0]
         else:
             category = None
 
         # Property reference code
-        if (len(property.select("span.list__reference")) > 0):
-            ref = property.select("span.list__reference")[0].text.strip()
+        if (len(property.select("span.properties__reference")) > 0):
+            ref = property.select("span.properties__reference")[0].text.strip()
         else:
             ref = None
 
         # Property city and state
-        if (len(property.select("span.list__address")) > 0):
-            if (' - ' in property.select("span.list__address")[0].text.strip()):
-                if ('/' in property.select("span.list__address")[0].text.strip().split(" - ")[1]):
-                    city = property.select("span.list__address")[0].text.strip().split(" - ")[1].split('/')[0]
-                    state = property.select("span.list__address")[0].text.strip().split(" - ")[1].split('/')[1]
+        if (len(property.select("p.properties__address")) > 0):
+            if (' - ' in property.select("p.properties__address")[0].text.strip()):
+                if ('/' in property.select("p.properties__address")[0].text.strip().split(" - ")[1]):
+                    city = property.select("p.properties__address")[0].text.strip().split(" - ")[1].split('/')[0]
+                    state = property.select("p.properties__address")[0].text.strip().split(" - ")[1].split('/')[1]
                 else:
                     city = None
                     state = None
@@ -265,21 +258,21 @@ def lelo_scraper():
             state = None
 
         # Property area
-        if (len(property.select("div.list__feature")) > 0) and (len(property.select("div.list__feature")[0].select('div.list__item')) > 0) and (len(property.select("div.list__feature")[0].select('div.list__item')[0].select('span')) > 0) and (len(property.select("div.list__feature")[0].select('div.list__item')[0].select('span')[0].text.split()) > 0):
-            area = property.select("div.list__feature")[0].select('div.list__item')[0].select('span')[0].text.split()[0]
+        if (len(property.select("div.properties__item")) > 0) and (len(property.select("div.properties__item")[0].select('span.number')) > 0) and (len(property.select("div.properties__item")[0].select('span.number')[0].text.replace('.', '').replace(',', '.').replace('m²', '').strip()) > 0):
+            area = property.select("div.properties__item")[0].select('span.number')[0].text.replace('.', '').replace(',', '.').replace('m²', '').strip()
         else:
             area = None
 
         # Property number of bedroom and garage
-        if (len(property.select("div.list__feature")) > 0):
+        if (len(property.select("div.properties__item")) >= 4):
 
-            if len(property.select("div.list__feature")[0].select('div.list__item')) > 1:
-                num_bedroom = property.select("div.list__feature")[0].select('div.list__item')[1].select('span')[0].text.strip()
+            if (len(property.select("div.properties__item")[1]) > 0):
+                num_bedroom = property.select("div.properties__item")[1].text.strip()
             else:
                 num_bedroom = None
 
-            if len(property.select("div.list__feature")[0].select('div.list__item')) > 2:
-                num_garage = property.select("div.list__feature")[0].select('div.list__item')[2].select('span')[0].text.strip()
+            if (len(property.select("div.properties__item")[3]) > 0):
+                num_garage = property.select("div.properties__item")[3].text.strip()
             else:
                 num_garage = None
 
@@ -292,17 +285,17 @@ def lelo_scraper():
 
         # Property latitude and longitude
         try:
-            lat = float(property_page.select_one("div.card__map-container")['data-latitude'])
-            long = float(property_page.select_one("div.card__map-container")['data-longitude'])
+            lat = float(property_page.select_one("div.property__map")['data-latitude'])
+            long = float(property_page.select_one("div.property__map")['data-longitude'])
         except:
             lat = None
             long = None
 
         # Property images
-        if (len(property_page.select('div.card__photo-box')) > 0):
+        if (len(property_page.select('div.property__gallery-slider-container')[0].select('li.property__gallery-slide.property__gallery-slide')) > 0):
 
-            images = property_page.select('div.card__photo-box')[0].select('img')
-            images = [image['src'] for image in images]
+            images = property_page.select('div.property__gallery-slider-container')[0].select('li.property__gallery-slide.property__gallery-slide')
+            images = [image.select('img')[0]['src'] for image in images]
             images = list(set(images))
 
             if (len(images) > 0):
