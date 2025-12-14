@@ -41,160 +41,165 @@ def pedro_granado_scraper():
 
     for property in properties:
 
-        # Property URL
-        if (len(property.select('div.col-lg-4 a')) > 0) and ('href' in property.select('div.col-lg-4 a')[0].attrs):
-            url = property.select('div.col-lg-4 a')[0]['href']
-            property_url = f"https://www.pedrogranado.com.br/{url}"
-            actual_properties_url.append(property_url)
-        else:
-            property_url = 'URL not found'
+        try:
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-            continue
+            # Property URL
+            if (len(property.select('div.col-lg-4 a')) > 0) and ('href' in property.select('div.col-lg-4 a')[0].attrs):
+                url = property.select('div.col-lg-4 a')[0]['href']
+                property_url = f"https://www.pedrogranado.com.br/{url}"
+                actual_properties_url.append(property_url)
+            else:
+                property_url = 'URL not found'
 
-        # Property district
-        if (len(property.select('div.col-lg-4 h4')) > 0):
-            district = property.select('div.col-lg-4 h4')[0].text.strip()
-        else:
-            district = None
+            if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+                continue
 
-        # Property price
-        if (len(property.select('div.col-lg-4 h3')) > 0):
-            price = property.select('div.col-lg-4 h3')[0].text.strip()
-        else:
-            price = None
+            # Property district
+            if (len(property.select('div.col-lg-4 h4')) > 0):
+                district = property.select('div.col-lg-4 h4')[0].text.strip()
+            else:
+                district = None
 
-        # Property category, type, reference code, city, state and area
-        if (len(property.select('div.col-lg-4 small')) > 0) and ('\n\n' in property.select('div.col-lg-4 small')[0].text):
-            small_text = property.select('div.col-lg-4 small')[0].text.split('\n\n')
+            # Property price
+            if (len(property.select('div.col-lg-4 h3')) > 0):
+                price = property.select('div.col-lg-4 h3')[0].text.strip()
+            else:
+                price = None
 
-            if len(small_text) > 0:
-                if (':' in small_text[0]):
-                    ref = small_text[0].split(':')[1].strip() if len(small_text) > 0 else None
+            # Property category, type, reference code, city, state and area
+            if (len(property.select('div.col-lg-4 small')) > 0) and ('\n\n' in property.select('div.col-lg-4 small')[0].text):
+                small_text = property.select('div.col-lg-4 small')[0].text.split('\n\n')
+
+                if len(small_text) > 0:
+                    if (':' in small_text[0]):
+                        ref = small_text[0].split(':')[1].strip() if len(small_text) > 0 else None
+                    else:
+                        ref = None
+
+                if len(small_text) > 1:
+                    if ('-' in small_text[1]):
+                        category = small_text[1].split('-')[0].strip()
+                        type = small_text[1].split('-')[1].strip()
+                    else:
+                        category = None
+                        type = None
+
+                if len(small_text) > 2:
+                    if ('-' in small_text[2]):
+                        city = small_text[2].split('-')[0].strip()
+                        state = small_text[2].split('-')[1].strip()
+                    else:
+                        city = None
+                        state = None
+
+                if len(small_text) > 3:
+                    if (':' in small_text[3]):
+                        area = small_text[3].split(':')[1].strip()
+                    else:
+                        area = None
+
+            else:
+                category = None
+                type = None
+                ref = None
+                city = None
+                state = None
+                area = None
+
+            # Property number of bedroom, bathroom and garage
+            if (len(property.select('div.d-inline')) > 0):
+                num_bed_bath_garage = property.select('div.d-inline')
+
+                if ('|' in num_bed_bath_garage[0].text) and (len(num_bed_bath_garage) > 0):
+                    num_bedroom = num_bed_bath_garage[0].text.split('|')[1].strip()
                 else:
-                    ref = None
+                    num_bedroom = None
 
-            if len(small_text) > 1:
-                if ('-' in small_text[1]):
-                    category = small_text[1].split('-')[0].strip()
-                    type = small_text[1].split('-')[1].strip()
+                if ('|' in num_bed_bath_garage[1].text) and (len(num_bed_bath_garage) > 1):
+                    num_bathroom = num_bed_bath_garage[1].text.split('|')[1].strip()
                 else:
-                    category = None
-                    type = None
+                    num_bathroom = None
 
-            if len(small_text) > 2:
-                if ('-' in small_text[2]):
-                    city = small_text[2].split('-')[0].strip()
-                    state = small_text[2].split('-')[1].strip()
+                if ('|' in num_bed_bath_garage[2].text) and (len(num_bed_bath_garage) > 2):
+                    num_garage = num_bed_bath_garage[2].text.split('|')[1].strip()
                 else:
-                    city = None
-                    state = None
+                    num_garage = None
 
-            if len(small_text) > 3:
-                if (':' in small_text[3]):
-                    area = small_text[3].split(':')[1].strip()
-                else:
-                    area = None
-
-        else:
-            category = None
-            type = None
-            ref = None
-            city = None
-            state = None
-            area = None
-
-        # Property number of bedroom, bathroom and garage
-        if (len(property.select('div.d-inline')) > 0):
-            num_bed_bath_garage = property.select('div.d-inline')
-
-            if ('|' in num_bed_bath_garage[0].text) and (len(num_bed_bath_garage) > 0):
-                num_bedroom = num_bed_bath_garage[0].text.split('|')[1].strip()
             else:
                 num_bedroom = None
-
-            if ('|' in num_bed_bath_garage[1].text) and (len(num_bed_bath_garage) > 1):
-                num_bathroom = num_bed_bath_garage[1].text.split('|')[1].strip()
-            else:
                 num_bathroom = None
-
-            if ('|' in num_bed_bath_garage[2].text) and (len(num_bed_bath_garage) > 2):
-                num_garage = num_bed_bath_garage[2].text.split('|')[1].strip()
-            else:
                 num_garage = None
 
-        else:
-            num_bedroom = None
-            num_bathroom = None
-            num_garage = None
+            # Loads property page
+            property_page = get_html(property_url)
 
-        # Loads property page
-        property_page = get_html(property_url)
+            # Property latitude and longitude
+            scripts = property_page.find_all("script")
+            for script in scripts:
 
-        # Property latitude and longitude
-        scripts = property_page.find_all("script")
-        for script in scripts:
+                try:
+                    if script.string and "const lat" in script.string:
+                        lat_match = re.search(r'const\s+lat\s*=\s*"([^"]+)"', script.string)
+                        lng_match = re.search(r'const\s+lng\s*=\s*"([^"]+)"', script.string)
 
-            try:
-                if script.string and "const lat" in script.string:
-                    lat_match = re.search(r'const\s+lat\s*=\s*"([^"]+)"', script.string)
-                    lng_match = re.search(r'const\s+lng\s*=\s*"([^"]+)"', script.string)
-
-                    if lat_match and lng_match:
-                        lat = float(lat_match.group(1))
-                        long = float(lng_match.group(1))
-                        break
+                        if lat_match and lng_match:
+                            lat = float(lat_match.group(1))
+                            long = float(lng_match.group(1))
+                            break
+                        else:
+                            lat = None
+                            long = None
                     else:
                         lat = None
                         long = None
-                else:
-                    lat = None
-                    long = None
-            except:
-                    lat = None
-                    long = None
+                except:
+                        lat = None
+                        long = None
 
-        # Property images
-        if (len(property_page.select('#imageGallery')) > 0):
+            # Property images
+            if (len(property_page.select('#imageGallery')) > 0):
 
-            images = property_page.select('#imageGallery')[0].select('img')
-            images = [image['src'] for image in images]
-            images = list(set(images))
+                images = property_page.select('#imageGallery')[0].select('img')
+                images = [image['src'] for image in images]
+                images = list(set(images))
 
-            if (len(images) > 0):
-                for image in images:
-                    property_images = pd.DataFrame([{
-                        'property_url': property_url,
-                        'image_url': image,
-                        'order': [i for i, img in enumerate(images) if img == image][0]
-                    }])
-                    properties_images = pd.concat([properties_images, property_images], ignore_index=True)
+                if (len(images) > 0):
+                    for image in images:
+                        property_images = pd.DataFrame([{
+                            'property_url': property_url,
+                            'image_url': image,
+                            'order': [i for i, img in enumerate(images) if img == image][0]
+                        }])
+                        properties_images = pd.concat([properties_images, property_images], ignore_index=True)
 
-        # Property broker
-        broker = 'Pedro Granado Imóveis'
+            # Property broker
+            broker = 'Pedro Granado Imóveis'
 
-        # Property informations
-        property_info = pd.DataFrame([{
-            'property_url': property_url,
-            'broker': broker,
-            'district': district,
-            'price': price,
-            'type': type,
-            'city': city,
-            'state': state,
-            'ref': ref,
-            'category': category,
-            'area': area,
-            'lat': lat,
-            'long': long,
-            'num_bedroom': num_bedroom,
-            'num_bathroom': num_bathroom,
-            'num_garage': num_garage
-        }])
+            # Property informations
+            property_info = pd.DataFrame([{
+                'property_url': property_url,
+                'broker': broker,
+                'district': district,
+                'price': price,
+                'type': type,
+                'city': city,
+                'state': state,
+                'ref': ref,
+                'category': category,
+                'area': area,
+                'lat': lat,
+                'long': long,
+                'num_bedroom': num_bedroom,
+                'num_bathroom': num_bathroom,
+                'num_garage': num_garage
+            }])
 
-        displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
+            displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
 
-        time.sleep(0.5)
+            time.sleep(0.5)
+
+        except:
+            continue
 
     return displayed_properties, properties_images
 
@@ -218,129 +223,134 @@ def lelo_scraper():
 
     for property in properties:
 
-        # Property URL
-        if (len( property.select('a')) > 0) and ('href' in property.select('a')[0].attrs):
-            url = property.select('a')[0]['href']
-            property_url = f"https://www.leloimoveis.com.br{url}"
-            actual_properties_url.append(property_url)
-        else:
-            property_url = 'URL not found'
+        try:
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-            continue
+            # Property URL
+            if (len( property.select('a')) > 0) and ('href' in property.select('a')[0].attrs):
+                url = property.select('a')[0]['href']
+                property_url = f"https://www.leloimoveis.com.br{url}"
+                actual_properties_url.append(property_url)
+            else:
+                property_url = 'URL not found'
 
-        # Property district
-        district = None
+            if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+                continue
 
-        # Property price
-        if (len(property.select("span.properties__price.number")) > 0):
-            price = property.select("span.properties__price.number")[0].text.strip()
-        else:
-            price = None
+            # Property district
+            district = None
 
-        # Property category
-        if (len(property.select("span.properties__type")) > 0) and (len(property.select("span.properties__type")[0].text.strip().split()) > 0):
-            category = property.select("span.properties__type")[0].text.strip().split()[0]
-        else:
-            category = None
+            # Property price
+            if (len(property.select("span.properties__price.number")) > 0):
+                price = property.select("span.properties__price.number")[0].text.strip()
+            else:
+                price = None
 
-        # Property reference code
-        if (len(property.select("span.properties__reference")) > 0):
-            ref = property.select("span.properties__reference")[0].text.strip()
-        else:
-            ref = None
+            # Property category
+            if (len(property.select("span.properties__type")) > 0) and (len(property.select("span.properties__type")[0].text.strip().split()) > 0):
+                category = property.select("span.properties__type")[0].text.strip().split()[0]
+            else:
+                category = None
 
-        # Property city and state
-        if (len(property.select("p.properties__address")) > 0):
-            if (' - ' in property.select("p.properties__address")[0].text.strip()):
-                if ('/' in property.select("p.properties__address")[0].text.strip().split(" - ")[1]):
-                    city = property.select("p.properties__address")[0].text.strip().split(" - ")[1].split('/')[0]
-                    state = property.select("p.properties__address")[0].text.strip().split(" - ")[1].split('/')[1]
+            # Property reference code
+            if (len(property.select("span.properties__reference")) > 0):
+                ref = property.select("span.properties__reference")[0].text.strip()
+            else:
+                ref = None
+
+            # Property city and state
+            if (len(property.select("p.properties__address")) > 0):
+                if (' - ' in property.select("p.properties__address")[0].text.strip()):
+                    if ('/' in property.select("p.properties__address")[0].text.strip().split(" - ")[1]):
+                        city = property.select("p.properties__address")[0].text.strip().split(" - ")[1].split('/')[0]
+                        state = property.select("p.properties__address")[0].text.strip().split(" - ")[1].split('/')[1]
+                    else:
+                        city = None
+                        state = None
                 else:
                     city = None
                     state = None
             else:
                 city = None
                 state = None
-        else:
-            city = None
-            state = None
 
-        # Property area
-        if (len(property.select("div.properties__item")) > 0) and (len(property.select("div.properties__item")[0].select('span.number')) > 0) and (len(property.select("div.properties__item")[0].select('span.number')[0].text.strip()) > 0):
-            area = property.select("div.properties__item")[0].select('span.number')[0].text.strip()
-        else:
-            area = None
+            # Property area
+            if (len(property.select("div.properties__item")) > 0) and (len(property.select("div.properties__item")[0].select('span.number')) > 0) and (len(property.select("div.properties__item")[0].select('span.number')[0].text.strip()) > 0):
+                area = property.select("div.properties__item")[0].select('span.number')[0].text.strip()
+            else:
+                area = None
 
-        # Property number of bedroom and garage
-        if (len(property.select("div.properties__item")) >= 4):
+            # Property number of bedroom and garage
+            if (len(property.select("div.properties__item")) >= 4):
 
-            if (len(property.select("div.properties__item")[1]) > 0):
-                num_bedroom = property.select("div.properties__item")[1].text.strip()
+                if (len(property.select("div.properties__item")[1]) > 0):
+                    num_bedroom = property.select("div.properties__item")[1].text.strip()
+                else:
+                    num_bedroom = None
+
+                if (len(property.select("div.properties__item")[3]) > 0):
+                    num_garage = property.select("div.properties__item")[3].text.strip()
+                else:
+                    num_garage = None
+
             else:
                 num_bedroom = None
-
-            if (len(property.select("div.properties__item")[3]) > 0):
-                num_garage = property.select("div.properties__item")[3].text.strip()
-            else:
                 num_garage = None
 
-        else:
-            num_bedroom = None
-            num_garage = None
+            # Loads property page
+            property_page = get_html(property_url)
 
-        # Loads property page
-        property_page = get_html(property_url)
+            # Property latitude and longitude
+            try:
+                lat = float(property_page.select_one("div.property__map")['data-latitude'])
+                long = float(property_page.select_one("div.property__map")['data-longitude'])
+            except:
+                lat = None
+                long = None
 
-        # Property latitude and longitude
-        try:
-            lat = float(property_page.select_one("div.property__map")['data-latitude'])
-            long = float(property_page.select_one("div.property__map")['data-longitude'])
+            # Property images
+            if (len(property_page.select('div.property__gallery-slider-container')[0].select('li.property__gallery-slide.property__gallery-slide')) > 0):
+
+                images = property_page.select('div.property__gallery-slider-container')[0].select('li.property__gallery-slide.property__gallery-slide')
+                images = [image.select('img')[0]['src'] for image in images]
+                images = list(set(images))
+
+                if (len(images) > 0):
+                    for image in images:
+                        property_images = pd.DataFrame([{
+                            'property_url': property_url,
+                            'image_url': image,
+                            'order': [i for i, img in enumerate(images) if img == image][0]
+                        }])
+                        properties_images = pd.concat([properties_images, property_images], ignore_index=True)
+
+            # Property broker
+            broker = 'Lelo Imóveis'
+
+            # Property informations
+            property_info = pd.DataFrame([{
+                'property_url': property_url,
+                'broker': broker,
+                'district': district,
+                'price': price,
+                'type': None,
+                'city': city,
+                'state': state,
+                'ref': ref,
+                'category': category,
+                'area': area,
+                'lat': lat,
+                'long': long,
+                'num_bedroom': num_bedroom,
+                'num_bathroom': None,
+                'num_garage': num_garage
+            }])
+
+            displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
+
+            time.sleep(0.5)
+
         except:
-            lat = None
-            long = None
-
-        # Property images
-        if (len(property_page.select('div.property__gallery-slider-container')[0].select('li.property__gallery-slide.property__gallery-slide')) > 0):
-
-            images = property_page.select('div.property__gallery-slider-container')[0].select('li.property__gallery-slide.property__gallery-slide')
-            images = [image.select('img')[0]['src'] for image in images]
-            images = list(set(images))
-
-            if (len(images) > 0):
-                for image in images:
-                    property_images = pd.DataFrame([{
-                        'property_url': property_url,
-                        'image_url': image,
-                        'order': [i for i, img in enumerate(images) if img == image][0]
-                    }])
-                    properties_images = pd.concat([properties_images, property_images], ignore_index=True)
-
-        # Property broker
-        broker = 'Lelo Imóveis'
-
-        # Property informations
-        property_info = pd.DataFrame([{
-            'property_url': property_url,
-            'broker': broker,
-            'district': district,
-            'price': price,
-            'type': None,
-            'city': city,
-            'state': state,
-            'ref': ref,
-            'category': category,
-            'area': area,
-            'lat': lat,
-            'long': long,
-            'num_bedroom': num_bedroom,
-            'num_bathroom': None,
-            'num_garage': num_garage
-        }])
-
-        displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
-
-        time.sleep(0.5)
+            continue
 
     return displayed_properties, properties_images
 
@@ -365,144 +375,149 @@ def silvio_iwata_scraper():
 
     for property in properties:
 
-        # Property URL
-        if (len(property.select('div.box-img-lista')) > 0) and (len(property.select('div.box-img-lista')[0].select('a')) > 0) and ('href' in property.select('div.box-img-lista')[0].select('a')[0].attrs):
-            url = property.select('div.box-img-lista')[0].select('a')[0]['href']
-            property_url = f"https://www.silvioiwata.com.br{url}"
-            actual_properties_url.append(property_url)
-        else:
-            property_url = 'URL not found'
+        try:
 
-        if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
-            continue
+            # Property URL
+            if (len(property.select('div.box-img-lista')) > 0) and (len(property.select('div.box-img-lista')[0].select('a')) > 0) and ('href' in property.select('div.box-img-lista')[0].select('a')[0].attrs):
+                url = property.select('div.box-img-lista')[0].select('a')[0]['href']
+                property_url = f"https://www.silvioiwata.com.br{url}"
+                actual_properties_url.append(property_url)
+            else:
+                property_url = 'URL not found'
 
-        # Property district, city and state
-        if (len(property.select('div.lista-imoveis-detalhes')) > 0) and (len(property.select('div.lista-imoveis-detalhes')[0].select('strong')) > 1):
-            if ('-' in property.select('div.lista-imoveis-detalhes')[0].select('strong')[1].text):
-                bold_text = property.select('div.lista-imoveis-detalhes')[0].select('strong')[1].text.split('-')
-                district = bold_text[0].strip() if len(bold_text) == 3 else None
-                city = bold_text[1].strip() if len(bold_text) == 3 else bold_text[0].strip()
-                state = bold_text[2].strip() if len(bold_text) == 3 else bold_text[1].strip()
+            if (property_url == 'URL not found') or (property_url in past_properties['property_url'].values):
+                continue
+
+            # Property district, city and state
+            if (len(property.select('div.lista-imoveis-detalhes')) > 0) and (len(property.select('div.lista-imoveis-detalhes')[0].select('strong')) > 1):
+                if ('-' in property.select('div.lista-imoveis-detalhes')[0].select('strong')[1].text):
+                    bold_text = property.select('div.lista-imoveis-detalhes')[0].select('strong')[1].text.split('-')
+                    district = bold_text[0].strip() if len(bold_text) == 3 else None
+                    city = bold_text[1].strip() if len(bold_text) == 3 else bold_text[0].strip()
+                    state = bold_text[2].strip() if len(bold_text) == 3 else bold_text[1].strip()
+                else:
+                    district = None
+                    city = None
+                    state = None
             else:
                 district = None
                 city = None
                 state = None
-        else:
-            district = None
-            city = None
-            state = None
 
-        # Property price, category, area
-        if (len(property.select('div.lista-imoveis-detalhes')) > 0):
+            # Property price, category, area
+            if (len(property.select('div.lista-imoveis-detalhes')) > 0):
 
-            if (len(property.select('div.lista-imoveis-detalhes')[0].select('strong')) > 0):
-                price = property.select('div.lista-imoveis-detalhes')[0].select('strong')[0].text.strip()
-            else:
-                price = None
+                if (len(property.select('div.lista-imoveis-detalhes')[0].select('strong')) > 0):
+                    price = property.select('div.lista-imoveis-detalhes')[0].select('strong')[0].text.strip()
+                else:
+                    price = None
 
-            if (len(property.select('div.lista-imoveis-detalhes')[0].select('p')) > 1):
-                if ('\n' in property.select('div.lista-imoveis-detalhes')[0].select('p')[1].text):
-                    small_text = property.select('div.lista-imoveis-detalhes')[0].select('p')[1].text.split('\n')
-                    small_text = [text.strip() for text in small_text]
-                    small_text = [text for text in small_text if text != '']
-                    category = small_text[0] if len(small_text) > 0 else None
-                    if (len(small_text) > 1) and (':' in small_text[1]):
-                        area = small_text[1].split(':')[1].strip() if len(small_text) > 1 else None
+                if (len(property.select('div.lista-imoveis-detalhes')[0].select('p')) > 1):
+                    if ('\n' in property.select('div.lista-imoveis-detalhes')[0].select('p')[1].text):
+                        small_text = property.select('div.lista-imoveis-detalhes')[0].select('p')[1].text.split('\n')
+                        small_text = [text.strip() for text in small_text]
+                        small_text = [text for text in small_text if text != '']
+                        category = small_text[0] if len(small_text) > 0 else None
+                        if (len(small_text) > 1) and (':' in small_text[1]):
+                            area = small_text[1].split(':')[1].strip() if len(small_text) > 1 else None
+                        else:
+                            area = None
                     else:
+                        category = None
                         area = None
                 else:
                     category = None
                     area = None
             else:
+                price = None
                 category = None
                 area = None
-        else:
-            price = None
-            category = None
-            area = None
 
-        # Property number of bedroom, bathroom and garage
-        if (len(property.select('span.box-comodo')) > 0):
-            bed_bath_garage = property.select('span.box-comodo')[0]
+            # Property number of bedroom, bathroom and garage
+            if (len(property.select('span.box-comodo')) > 0):
+                bed_bath_garage = property.select('span.box-comodo')[0]
 
-            if len(bed_bath_garage) > 1:
+                if len(bed_bath_garage) > 1:
 
-                gross_num_bedroom = bed_bath_garage.select('span.bath')
-                gross_num_bedroom = gross_num_bedroom[0].text if gross_num_bedroom else None
-                if gross_num_bedroom is not None:
-                    if '+' in gross_num_bedroom:
-                        num_bedroom = sum([float(num.strip()) for num in gross_num_bedroom.split('+')])
+                    gross_num_bedroom = bed_bath_garage.select('span.bath')
+                    gross_num_bedroom = gross_num_bedroom[0].text if gross_num_bedroom else None
+                    if gross_num_bedroom is not None:
+                        if '+' in gross_num_bedroom:
+                            num_bedroom = sum([float(num.strip()) for num in gross_num_bedroom.split('+')])
+                        else:
+                            num_bedroom = gross_num_bedroom.strip()
                     else:
-                        num_bedroom = gross_num_bedroom.strip()
+                        num_bedroom = None
+
+                    num_bathroom = bed_bath_garage.select('span.bathroom')
+                    num_bathroom = num_bathroom[0].text if num_bathroom else None
+
+                    num_garage = bed_bath_garage.select('span.garage')
+                    num_garage = num_garage[0].text.strip() if num_garage else None
+
                 else:
                     num_bedroom = None
-
-                num_bathroom = bed_bath_garage.select('span.bathroom')
-                num_bathroom = num_bathroom[0].text if num_bathroom else None
-
-                num_garage = bed_bath_garage.select('span.garage')
-                num_garage = num_garage[0].text.strip() if num_garage else None
-
+                    num_bathroom = None
+                    num_garage = None
             else:
-                num_bedroom = None
-                num_bathroom = None
-                num_garage = None
-        else:
-                num_bedroom = None
-                num_bathroom = None
-                num_garage = None
+                    num_bedroom = None
+                    num_bathroom = None
+                    num_garage = None
 
-        # Loads property page
-        property_page = get_html(property_url)
+            # Loads property page
+            property_page = get_html(property_url)
 
-        # Property latitude and longitude
-        try:
-            lat, long = map(float, property_page.select_one("#coordenadas_mapa").text.split(","))
+            # Property latitude and longitude
+            try:
+                lat, long = map(float, property_page.select_one("#coordenadas_mapa").text.split(","))
+            except:
+                lat = None
+                long = None
+
+            # Property images
+            if (len(property_page.select('div.slider')) > 0):
+
+                images = property_page.select('div.slider')[0].select('img')
+                images = [image['src'] for image in images]
+                images = list(set(images))
+
+                if (len(images) > 0):
+                    for image in images:
+                        property_images = pd.DataFrame([{
+                            'property_url': property_url,
+                            'image_url': image,
+                            'order': [i for i, img in enumerate(images) if img == image][0]
+                        }])
+                        properties_images = pd.concat([properties_images, property_images], ignore_index=True)
+
+            # Property broker
+            broker = 'Silvio Iwata'
+
+            # Property informations
+            property_info = pd.DataFrame([{
+                'property_url': property_url,
+                'broker': broker,
+                'district': district,
+                'price': price,
+                'type': None,
+                'city': city,
+                'state': state,
+                'ref': None,
+                'category': category,
+                'area': area,
+                'lat': lat,
+                'long': long,
+                'num_bedroom': num_bedroom,
+                'num_bathroom': num_bathroom,
+                'num_garage': num_garage
+            }])
+
+            displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
+
+            time.sleep(0.5)
+        
         except:
-            lat = None
-            long = None
-
-        # Property images
-        if (len(property_page.select('div.slider')) > 0):
-
-            images = property_page.select('div.slider')[0].select('img')
-            images = [image['src'] for image in images]
-            images = list(set(images))
-
-            if (len(images) > 0):
-                for image in images:
-                    property_images = pd.DataFrame([{
-                        'property_url': property_url,
-                        'image_url': image,
-                        'order': [i for i, img in enumerate(images) if img == image][0]
-                    }])
-                    properties_images = pd.concat([properties_images, property_images], ignore_index=True)
-
-        # Property broker
-        broker = 'Silvio Iwata'
-
-        # Property informations
-        property_info = pd.DataFrame([{
-            'property_url': property_url,
-            'broker': broker,
-            'district': district,
-            'price': price,
-            'type': None,
-            'city': city,
-            'state': state,
-            'ref': None,
-            'category': category,
-            'area': area,
-            'lat': lat,
-            'long': long,
-            'num_bedroom': num_bedroom,
-            'num_bathroom': num_bathroom,
-            'num_garage': num_garage
-        }])
-
-        displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
-
-        time.sleep(0.5)
+            continue
 
     return displayed_properties, properties_images
 
