@@ -6,6 +6,8 @@ Contact: joaopaiva.datascience@gmail.com.
 
 Github: https://github.com/joaopaivaa.
 
+Portfolio: https://joaopaivaa.github.io/.
+
 ## :inbox_tray: ETL
 
 ### E - Extraction
