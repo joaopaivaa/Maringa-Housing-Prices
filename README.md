@@ -2,11 +2,11 @@
 
 Author: João Paiva.
 
-Contact: joaopaiva.datascience@gmail.com.
+Contact: joaopaiva.datascience@gmail.com
 
-Github: https://github.com/joaopaivaa.
+Github: https://github.com/joaopaivaa
 
-Portfolio: https://joaopaivaa.github.io/.
+Portfolio: https://joaopaivaa.github.io/
 
 ## :inbox_tray: ETL
 
