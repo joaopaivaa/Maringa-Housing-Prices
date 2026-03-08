@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print(BASE_DIR)
 
 past_properties = pd.read_csv(os.path.join(BASE_DIR, "bronze/Properties.csv"), encoding='utf-8', sep=';')
-past_properties_images = pd.read_csv(os.path.join(BASE_DIR, "bronze/Properties Images.csv"), encoding='utf-8', sep=';')
+# past_properties_images = pd.read_csv(os.path.join(BASE_DIR, "bronze/Properties Images.csv"), encoding='utf-8', sep=';')
 
 actual_properties_url = []
 
@@ -515,7 +515,7 @@ def silvio_iwata_scraper():
             displayed_properties = pd.concat([displayed_properties, property_info], ignore_index=True)
 
             time.sleep(0.5)
-        
+
         except:
             continue
 
@@ -524,53 +524,66 @@ def silvio_iwata_scraper():
 # Execute scraper
 
 inicio = time.time()
-inicio_PG = time.time()
 
 # Scrapes Pedro Granado Imóveis
-try:
-    displayed_properties_pedro_granado, properties_images_pedro_granado = pedro_granado_scraper()
-except:
-    max_tries = 2
-    for i in range(max_tries):
-        displayed_properties_pedro_granado, properties_images_pedro_granado = pedro_granado_scraper()
-        break
 
-fim = time.time()
-print('\nPedro Granado Imóveis')
-print(f'Número de imoveis: {len(displayed_properties_pedro_granado)}')
-print(f"Tempo de execução: {round(fim - inicio_PG, 2)} segundos")
+inicio_PG = time.time()
+
+max_attempts = 2
+for i in range(max_attempts):
+    try:
+        displayed_properties_pedro_granado, properties_images_pedro_granado = pedro_granado_scraper()
+        print(f"Success on attempt {i + 1}")
+        print('\nPedro Granado Imóveis')
+        print(f'Número de imoveis: {len(displayed_properties_pedro_granado)}')
+        fim = time.time()
+        print(f"Tempo de execução: {round(fim - inicio_PG, 2)} segundos")
+        break
+    except Exception as e:
+        print(f"attempt {i + 1} went wrong. Error: {e}")
+        if i == max_attempts - 1:
+            print("Max attempts reached. Running the rest of the code...")
+            displayed_properties_pedro_granado = pd.DataFrame()
+
+# Scrapes Lelo Imóveis
 
 inicio_LE = time.time()
 
-# Scrapes Lelo Imóveis
-try:
-    displayed_properties_lelo, properties_images_lelo = lelo_scraper()
-except:
-    max_tries = 2
-    for i in range(max_tries):
+max_attempts = 2
+for i in range(max_attempts):
+    try:
         displayed_properties_lelo, properties_images_lelo = lelo_scraper()
+        print(f"Success on attempt {i + 1}")
+        print('\nLelo Imóveis')
+        print(f'Número de imoveis: {len(displayed_properties_lelo)}')
+        fim = time.time()
+        print(f"Tempo de execução: {round(fim - inicio_LE, 2)} segundos")
         break
+    except Exception as e:
+        print(f"attempt {i + 1} went wrong. Error: {e}")
+        if i == max_attempts - 1:
+            print("Max attempts reached. Running the rest of the code...")
+            displayed_properties_lelo = pd.DataFrame()
 
-fim = time.time()
-print('\nLelo Imóveis')
-print(f'Número de imoveis: {len(displayed_properties_lelo)}')
-print(f"Tempo de execução: {round(fim - inicio_LE, 2)} segundos")
+# Scrapes Silvio Iwata Imóveis
 
 inicio_SI = time.time()
 
-# Scrapes Silvio Iwata Imóveis
-try:
-    displayed_properties_silvio_iwata, properties_images_silvio_iwata = silvio_iwata_scraper()
-except:
-    max_tries = 2
-    for i in range(max_tries):
+max_attempts = 2
+for i in range(max_attempts):
+    try:
         displayed_properties_silvio_iwata, properties_images_silvio_iwata = silvio_iwata_scraper()
+        print(f"Success on attempt {i + 1}")
+        print('\nSilvio Iwata Imóveis')
+        print(f'Número de imoveis: {len(displayed_properties_silvio_iwata)}')
+        fim = time.time()
+        print(f"Tempo de execução: {round(fim - inicio_SI, 2)} segundos")
         break
-
-fim = time.time()
-print('\nSilvio Iwata Imóveis')
-print(f'Número de imoveis: {len(displayed_properties_silvio_iwata)}')
-print(f"Tempo de execução: {round(fim - inicio_SI, 2)} segundos")
+    except Exception as e:
+        print(f"attempt {i + 1} went wrong. Error: {e}")
+        if i == max_attempts - 1:
+            print("Max attempts reached. Running the rest of the code...")
+            displayed_properties_silvio_iwata = pd.DataFrame()
 
 # Properties data ###################################################################################
 
@@ -590,13 +603,13 @@ past_properties.to_csv(os.path.join(BASE_DIR, "bronze/Properties.csv"), sep=';',
 
 # Images data ######################################################################################
 
-properties_images = pd.concat([properties_images_pedro_granado,
-                               properties_images_lelo,
-                               properties_images_silvio_iwata], ignore_index=True)
+# properties_images = pd.concat([properties_images_pedro_granado,
+#                               properties_images_lelo,
+#                               properties_images_silvio_iwata], ignore_index=True)
 
-# Update list of images
-past_properties_images = pd.concat([past_properties_images, properties_images], ignore_index=True)
-past_properties_images.to_csv(os.path.join(BASE_DIR, "bronze/Properties Images.csv"), sep=';', index=False)
+# # Update list of images
+# past_properties_images = pd.concat([past_properties_images, properties_images], ignore_index=True)
+# past_properties_images.to_csv(os.path.join(BASE_DIR, "bronze/Properties Images.csv"), sep=';', index=False)
 
 fim = time.time()
 print(f"Tempo de execução total: {fim - inicio:.6f} segundos")
